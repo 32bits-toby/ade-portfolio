@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Method | [User Name]</title>
+</head>
+
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="logo">[User Name]</a>
+            <div class="nav-links">
+                <a href="/security.html">Security</a>
+                <a href="/design.html">Design</a>
+                <a href="/method.html">Method</a>
+                <a href="/about.html">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container hero" style="min-height: 50vh;">
+        <h1>From User Flows to Attack Flows</h1>
+    </div>
+
+    <div class="container text-container">
+        <p class="shout">
+            "I use the same mental model for design and security—just with an adversarial lens."
+        </p>
+
+        <h2>Modelling Invariants</h2>
+        <p>
+            In design, an invariant might be "A user must be logged in to see this page." In security, we ask "Can a
+            user force the system to show this page without being logged in?"
+        </p>
+
+        <h2>State Transitions</h2>
+        <p>
+            Most bugs happen in the 'space between' states. I map every possible transition and check for edge cases
+            where the system might hang, de-sync, or allow an illegal move.
+        </p>
+    </div>
+
+    <footer>
+        <div class="container footer-inner">
+            <div class="logo">[User Name]</div>
+            <div>
+                <span style="margin-right: 20px;">status: <span style="color: green;">●</span> available</span>
+            </div>
+        </div>
+    </footer>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

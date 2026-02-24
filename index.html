@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Toby | Security Researcher</title>
+  <style>
+    /* Critical: Loader renders before anything else */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.9s cubic-bezier(0.76, 0, 0.24, 1);
+      will-change: transform;
+    }
+
+    .preloader.dismiss {
+      transform: translateY(-100%);
+    }
+
+    .preloader-text {
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.03em;
+      display: flex;
+      align-items: baseline;
+    }
+
+    .preloader-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: charIn 0.4s forwards;
+    }
+
+    .preloader-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.85em;
+      background: #fff;
+      margin-left: 2px;
+      animation: blink 0.6s step-end infinite;
+      align-self: center;
+    }
+
+    @keyframes charIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* No page-hiding CSS here — handled via inline style + JS to avoid
+       conflicting with #page-content's transform transitions */
+  </style>
+</head>
+
+<body class="home-page">
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-text">
+      <span class="preloader-char" style="animation-delay:0.1s">t</span><span class="preloader-char"
+        style="animation-delay:0.2s">o</span><span class="preloader-char" style="animation-delay:0.3s">b</span><span
+        class="preloader-char" style="animation-delay:0.4s">y</span><span class="preloader-char"
+        style="animation-delay:0.55s">.</span>
+      <span class="preloader-cursor"></span>
+    </div>
+  </div>
+
+
+  <!-- 3D MENU PANEL (sits behind page) -->
+  <div id="menu-panel">
+    <div class="menu-panel-inner">
+      <div class="menu-close">✕ Close</div>
+      <nav class="menu-nav">
+        <a href="/" class="menu-nav-link">Home</a>
+        <a href="#work" class="menu-nav-link">Work</a>
+        <a href="/about.html" class="menu-nav-link">About</a>
+      </nav>
+      <div class="menu-social">
+        <a href="#" class="menu-social-link">LinkedIn</a>
+        <a href="#" class="menu-social-link">Twitter</a>
+        <a href="#" class="menu-social-link">GitHub</a>
+        <a href="#" class="menu-social-link">Telegram</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE CONTENT WRAPPER (this rotates on menu open) -->
+  <div id="page-content">
+    <!-- HERO SECTION -->
+    <div class="hero">
+      <canvas id="hero-waves"></canvas>
+
+      <div class="hero-nav">
+        <div class="menu-trigger" style="cursor: pointer;"><span class="menu-icon">=</span> Menu</div>
+        <div class="logo-initials">toby.</div>
+      </div>
+
+      <div class="hero-content">
+        <div class="hero-rotator">
+          <span class="hero-rotator-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M10.49 2.23L5.5 4.1c-1.15.43-2.09 1.79-2.09 3.01v7.43c0 1.18.78 2.73 1.73 3.44l4.3 3.21c1.41 1.06 3.73 1.06 5.14 0l4.3-3.21c.95-.71 1.73-2.26 1.73-3.44V7.12c0-1.23-.94-2.59-2.09-3.02l-4.99-1.87c-.85-.31-2.21-.31-3.04 0Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></span>
+          <span class="hero-rotator-text" id="hero-rotator-text">Architecture & design reviews from a security
+            perspective</span>
+        </div>
+        <h1 class="hero-title reveal-text delay-1">
+          <span class="text-bright">Toby helps teams make the right design decisions from a security perspective.</span>
+        </h1>
+        <p class="hero-sub reveal-text delay-2">
+          Reviewing systems at the design layer, before bad assumptions ship and become exploits.
+        </p>
+      </div>
+
+      <div class="scroll-indicator">
+        <div class="scroll-dot"></div>
+      </div>
+    </div>
+
+
+    <!-- RESEARCH ARCHIVE RAIL -->
+    <section class="research-rail container reveal-text delay-1">
+
+      <div class="rail-header">
+        <h2 class="section-label">Selected Analyses</h2>
+        <a href="/research" class="rail-header-link">All Analysis <span class="arrow">→</span></a>
+      </div>
+
+      <div class="rail-track">
+        <!-- Card 1 -->
+        <article class="rail-card" onclick="window.location.href='/research/withdrawal-flow'">
+          <div class="rail-visual">
+            <img src="/public/assets/design-1.svg" alt="DeFi Vault Flow">
+          </div>
+          <div class="rail-content">
+            <h3 class="rail-title">Rethinking the Withdrawal Flow in a DeFi Vault</h3>
+            <div class="rail-meta">DeFi · Design Review · 2025</div>
+            <p class="rail-summary">Identified a partial-failure state that could lock funds and proposed a safer,
+              atomic settlement flow.</p>
+            <span class="rail-cta">Read case →</span>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="rail-card" onclick="window.location.href='/research/permit-vs-approve'">
+          <div class="rail-visual">
+            <img src="/public/assets/design-2.svg" alt="Permit vs Approve">
+          </div>
+          <div class="rail-content">
+            <h3 class="rail-title">Permit vs Approve: When UX Convenience Changes the Threat Model</h3>
+            <div class="rail-meta">Token Design · Architecture Review · 2025</div>
+            <p class="rail-summary">Showed how introducing permit reshaped trust boundaries and recommended a safer
+              integration pattern.</p>
+            <span class="rail-cta">Read case →</span>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="rail-card" onclick="window.location.href='/research/admin-powers'">
+          <div class="rail-visual">
+            <img src="/public/assets/design-3.svg" alt="Admin Upgrade Path">
+          </div>
+          <div class="rail-content">
+            <h3 class="rail-title">Admin Powers and Upgrade Paths: Designing for the Inevitable Failure</h3>
+            <div class="rail-meta">Governance · System Analysis · 2024</div>
+            <p class="rail-summary">Mapped hidden privilege escalation paths and proposed a constrained, auditable
+              upgrade model.</p>
+            <span class="rail-cta">Read case →</span>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="rail-card" onclick="window.location.href='/research/user-flow-attack'">
+          <div class="rail-visual">
+            <img src="/public/assets/design-4.svg" alt="User Flow Attack">
+          </div>
+          <div class="rail-content">
+            <h3 class="rail-title">The User Flow That Became an Attack Path</h3>
+            <div class="rail-meta">UX Flow · Threat Modeling · 2025</div>
+            <p class="rail-summary">Traced a normal user journey that bypassed a critical invariant and redesigned the
+              flow to enforce state safety.</p>
+            <span class="rail-cta">Read case →</span>
+          </div>
+        </article>
+
+        <!-- Card 5 -->
+        <article class="rail-card" onclick="window.location.href='/research/staking-state-machines'">
+          <div class="rail-visual">
+            <img src="/public/assets/design-5.svg" alt="State Machine">
+          </div>
+          <div class="rail-content">
+            <h3 class="rail-title">State Machines in Staking Protocols: Where Assumptions Break</h3>
+            <div class="rail-meta">Protocol Architecture · Design Review · 2024</div>
+            <p class="rail-summary">Exposed an implicit state transition assumption and introduced a stricter,
+              verifiable state model.</p>
+            <span class="rail-cta">Read case →</span>
+          </div>
+        </article>
+    </section>
+
+    <!-- TOOLBOX DOCK SECTION -->
+    <section class="container dock-container">
+      <div class="macos-dock" data-vel-plugin="MacOsDock" data-vel-view="dock">
+        <div class="items">
+          <a href="#" class="item" data-vel-view="item" data-tooltip="User Flows">
+            <img src="/public/assets/design-1.svg" alt="User Flows" />
+          </a>
+          <a href="#" class="item" data-vel-view="item" data-tooltip="State Machines">
+            <img src="/public/assets/design-2.svg" alt="State Machines" />
+          </a>
+          <a href="#" class="item" data-vel-view="item" data-tooltip="Trust Boundaries">
+            <img src="/public/assets/design-3.svg" alt="Trust Boundaries" />
+          </a>
+          <a href="#" class="item" data-vel-view="item" data-tooltip="Permission Models">
+            <img src="/public/assets/design-4.svg" alt="Permission Models" />
+          </a>
+          <a href="#" class="item" data-vel-view="item" data-tooltip="Invariants">
+            <img src="/public/assets/design-5.svg" alt="Invariants" />
+          </a>
+          <a href="#" class="item" data-vel-view="item" data-tooltip="Assumptions">
+            <img src="/public/assets/design-1.svg" alt="Assumptions" />
+          </a>
+          <a href="#" class="item" data-vel-view="item" data-tooltip="Failure Modes">
+            <img src="/public/assets/design-2.svg" alt="Failure Modes" />
+          </a>
+        </div>
+      </div>
+      <p class="dock-label">TOOLBOX</p>
+    </section>
+
+
+
+    <!-- NARRATIVE SECTION -->
+    <section class="container narrative-stack">
+      <div class="narrative-grid">
+        <div class="narrative-label-col">
+          <h3 class="narrative-label reveal-text">About</h3>
+        </div>
+        <div class="narrative-content">
+          <p class="gsap-text-reveal semibold-narrative" id="special-text"><span class="text-bright">I’m a security
+              researcher working at the intersection of architecture, product, and engineering.</span></p>
+
+          <p class="gsap-text-reveal semibold-narrative"><span class="text-bright">I help teams design systems that are
+              secure by default.</span></p>
+
+          <div class="narrative-links reveal-text delay-1">
+            <a href="https://github.com/32bits-toby" class="narrative-pill" target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+              GitHub
+            </a>
+            <a href="https://app.skillsync.wiki/profile/32bits-toby" class="narrative-pill" target="_blank"
+              rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z" />
+              </svg>
+              SkillSync
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="container testimonials-section">
+      <div class="testimonials-cards">
+        <div class="testimonial-card reveal-text delay-1">
+          <div class="testimonial-card-inner">
+            <span class="testimonial-num">01</span>
+            <blockquote class="testimonial-text">Toby caught a critical state transition flaw in our withdrawal flow
+              that three prior audits missed. He thinks at the architecture level — not just the code level.
+            </blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">DK</div>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">Daniel K.</span>
+                <span class="testimonial-role">Head of Engineering, DeFi Protocol</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal-text delay-2">
+          <div class="testimonial-card-inner">
+            <span class="testimonial-num">02</span>
+            <blockquote class="testimonial-text">Most security researchers hand you a list of bugs. Toby handed us a
+              redesigned permission model that eliminated an entire class of vulnerabilities. That's a different kind of
+              value.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">SM</div>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">Sarah M.</span>
+                <span class="testimonial-role">Protocol Lead, L2 Infrastructure</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal-text delay-3">
+          <div class="testimonial-card-inner">
+            <span class="testimonial-num">03</span>
+            <blockquote class="testimonial-text">We brought Toby in before writing a single line of code. His design
+              review saved us from shipping an upgrade path that would have given admins unchecked power over user
+              funds.</blockquote>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">AR</div>
+              <div class="testimonial-meta">
+                <span class="testimonial-name">Alex R.</span>
+                <span class="testimonial-role">Co-founder, On-chain Governance Startup</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE BRIDGE SECTION -->
+    <section class="container bridge-section">
+      <div class="bridge-grid">
+        <!-- Left Column: Headline + CTA -->
+        <div class="bridge-left">
+          <h2 class="section-title reveal-text">Security is just design with an adversary.</h2>
+          <a href="/method.html" class="view-all-link reveal-text delay-1">View my method →</a>
+        </div>
+
+        <!-- Right Column: Transformation List -->
+        <div class="transformation-list reveal-text delay-1">
+          <div class="transformation-row">
+            <span class="term term-design">User Flows</span>
+            <div class="system-line"></div>
+            <span class="term term-security">Attack Paths</span>
+          </div>
+          <div class="transformation-row">
+            <span class="term term-design">States</span>
+            <div class="system-line"></div>
+            <span class="term term-security">Invariants</span>
+          </div>
+          <div class="transformation-row">
+            <span class="term term-design">Edge Cases</span>
+            <div class="system-line"></div>
+            <span class="term term-security">Bugs</span>
+          </div>
+          <div class="transformation-row">
+            <span class="term term-design">Assumptions</span>
+            <div class="system-line"></div>
+            <span class="term term-security">Exploits</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AVAILABILITY SECTION -->
+    <section class="availability-section container">
+      <div class="availability-grid">
+        <!-- Left column: empty whitespace -->
+        <div class="availability-spacer"></div>
+
+        <!-- Right column: content -->
+        <div class="availability-right">
+          <div class="availability-content reveal-text">
+            <div class="availability-location">
+              West Africa <span class="availability-status">(available to work)</span>
+            </div>
+            <div class="availability-time" id="live-time">
+              <!-- JS will populate this -->
+            </div>
+          </div>
+          <a href="mailto:hello@example.com" class="btn-pill reveal-text">Contact ↗</a>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- EDITORIAL FOOTER -->
+    <!-- EDITORIAL FOOTER -->
+    <footer class="editorial-footer">
+      <div class="footer-content container">
+        <!-- Left: Logo -->
+        <div class="footer-left">
+          <h2 class="footer-logo">toby.</h2>
+        </div>
+
+        <!-- Right: Navigation Group -->
+        <div class="footer-right">
+          <!-- Col 1: Menu -->
+          <div class="footer-col">
+            <h4 class="footer-title">Menu</h4>
+            <nav class="footer-nav">
+              <a href="/" class="footer-link">Home</a>
+              <a href="#work" class="footer-link">Work</a>
+              <a href="/about.html" class="footer-link">About</a>
+            </nav>
+          </div>
+
+          <!-- Col 2: Contact -->
+          <div class="footer-col">
+            <h4 class="footer-title">Contact</h4>
+            <nav class="footer-nav">
+              <a href="#" class="footer-link">LinkedIn</a>
+              <a href="#" class="footer-link">Twitter</a>
+              <a href="#" class="footer-link">GitHub</a>
+              <a href="#" class="footer-link">Telegram</a>
+            </nav>
+          </div>
+
+          <!-- Col 3: Back to top -->
+          <div class="footer-col footer-col-arrow">
+            <button id="back-to-top" class="scroll-top-btn" aria-label="Scroll to top">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 19V5M5 12l7-7 7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </div><!-- /#page-content -->
+</body>
+
+</html>

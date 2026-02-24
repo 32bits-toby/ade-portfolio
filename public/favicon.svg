@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <rect width="128" height="128" fill="#000000" />
+  <text
+    x="39"
+    y="83"
+    fill="#ffffff"
+    font-family="'Times New Roman', Georgia, serif"
+    font-size="74"
+    font-weight="700"
+    text-rendering="geometricPrecision">t</text>
+  <circle cx="72" cy="79" r="5.5" fill="#ffffff" />
+</svg>
