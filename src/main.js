@@ -14,11 +14,11 @@ const initHeroAnimations = () => {
   const rotatorEl = document.getElementById('hero-rotator-text');
   if (rotatorEl) {
     const phrases = [
-      'Data analysis, dashboards, and business-focused insights',
-      'SQL and Python workflows for reliable reporting',
-      'Power BI storytelling for clear stakeholder decisions',
-      'Messy data cleaning and transformation into analysis-ready tables',
-      'Predictive modeling experiments for practical business outcomes'
+      'Turning scattered spreadsheets into one clear dashboard',
+      'Flagging churn risks before they become lost revenue',
+      'Automating weekly reports so your team saves hours',
+      'Revealing which campaigns actually drive ROI',
+      'Building forecasts your planning team can trust'
     ];
     const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*';
     let currentIndex = 0;
@@ -390,37 +390,37 @@ const initNarrativeReveal = () => {
 };
 
 const initBridgeAnimations = () => {
-  // console.log('Initializing Bridge Animations');
-  const transformRows = document.querySelectorAll('.transformation-row');
+  const transformCards = document.querySelectorAll('.transform-card');
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
 
-  if (transformRows.length === 0) return;
+  if (transformCards.length === 0) return;
 
   // Clean old triggers in this section
   ScrollTrigger.getAll().forEach(t => {
-    // Heuristic check if trigger is related to these rows
-    if (t.trigger && (t.trigger.classList.contains('transformation-row') || t.trigger.classList.contains('transformation-container'))) {
+    if (t.trigger && (t.trigger.classList.contains('transform-card') || t.trigger.classList.contains('transform-grid'))) {
       t.kill();
     }
   });
 
-  transformRows.forEach((row, index) => {
-    const securityTerm = row.querySelector('.term-security');
-    // Store original text in dataset if not present to avoid "undefined" or lost text on re-run
-    if (!securityTerm.dataset.originalText) {
-      securityTerm.dataset.originalText = securityTerm.innerText.trim();
+  transformCards.forEach((card, index) => {
+    const toTerm = card.querySelector('.transform-to');
+    if (!toTerm) return;
+
+    // Store original text in dataset if not present
+    if (!toTerm.dataset.originalText) {
+      toTerm.dataset.originalText = toTerm.innerText.trim();
     }
-    const finalText = securityTerm.dataset.originalText;
+    const finalText = toTerm.dataset.originalText;
 
     // Set initial encrypted state
-    securityTerm.innerText = finalText.split('').map(() => chars[Math.floor(Math.random() * chars.length)]).join('');
+    toTerm.innerText = finalText.split('').map(() => chars[Math.floor(Math.random() * chars.length)]).join('');
 
-    // Row entrance animation
-    gsap.fromTo(row,
+    // Card entrance animation
+    gsap.fromTo(card,
       { opacity: 0, y: 20 },
       {
         scrollTrigger: {
-          trigger: row,
+          trigger: card,
           start: 'top 85%',
           toggleActions: 'play none none reverse'
         },
@@ -431,29 +431,11 @@ const initBridgeAnimations = () => {
       }
     );
 
-    // Animate Line (avoid pseudo-element selector runtime error)
-    const systemLine = row.querySelector('.system-line');
-    if (systemLine) {
-      gsap.fromTo(systemLine,
-        { scaleX: 0, transformOrigin: 'left center' },
-        {
-          scrollTrigger: {
-            trigger: row,
-            start: 'top 75%',
-            end: 'bottom 55%',
-            scrub: 1
-          },
-          scaleX: 1,
-          ease: 'power2.inOut'
-        }
-      );
-    }
-
     // Scramble / Decode Text Effect
     const scrambleObj = { value: 0 };
     gsap.to(scrambleObj, {
       scrollTrigger: {
-        trigger: row,
+        trigger: card,
         start: 'top 75%',
         end: 'bottom 55%',
         scrub: 1,
@@ -466,19 +448,19 @@ const initBridgeAnimations = () => {
           return chars[Math.floor(Math.random() * chars.length)];
         }).join('');
 
-        securityTerm.innerText = currentText;
+        toTerm.innerText = currentText;
 
         // Visual styles
         if (progress > 0.8) {
-          securityTerm.style.color = '#ff4d4d';
-          securityTerm.style.textShadow = '0 0 8px rgba(255, 77, 77, 0.4)';
-          securityTerm.style.opacity = 1;
-          securityTerm.style.filter = 'blur(0px)';
+          toTerm.style.color = '#ff4d4d';
+          toTerm.style.textShadow = '0 0 8px rgba(255, 77, 77, 0.4)';
+          toTerm.style.opacity = 1;
+          toTerm.style.filter = 'blur(0px)';
         } else {
-          securityTerm.style.color = '#ffffff';
-          securityTerm.style.textShadow = 'none';
-          securityTerm.style.opacity = 0.5 + (progress * 0.5);
-          securityTerm.style.filter = `blur(${2 - (progress * 2)}px)`;
+          toTerm.style.color = '#ffffff';
+          toTerm.style.textShadow = 'none';
+          toTerm.style.opacity = 0.5 + (progress * 0.5);
+          toTerm.style.filter = `blur(${2 - (progress * 2)}px)`;
         }
       }
     });
