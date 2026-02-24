@@ -391,7 +391,6 @@ const initNarrativeReveal = () => {
 
 const initBridgeAnimations = () => {
   const transformCards = document.querySelectorAll('.transform-card');
-  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
 
   if (transformCards.length === 0) return;
 
@@ -403,21 +402,9 @@ const initBridgeAnimations = () => {
   });
 
   transformCards.forEach((card, index) => {
-    const toTerm = card.querySelector('.transform-to');
-    if (!toTerm) return;
-
-    // Store original text in dataset if not present
-    if (!toTerm.dataset.originalText) {
-      toTerm.dataset.originalText = toTerm.innerText.trim();
-    }
-    const finalText = toTerm.dataset.originalText;
-
-    // Set initial encrypted state
-    toTerm.innerText = finalText.split('').map(() => chars[Math.floor(Math.random() * chars.length)]).join('');
-
     // Card entrance animation
     gsap.fromTo(card,
-      { opacity: 0, y: 20 },
+      { opacity: 0, y: 30 },
       {
         scrollTrigger: {
           trigger: card,
@@ -426,46 +413,12 @@ const initBridgeAnimations = () => {
         },
         opacity: 1,
         y: 0,
-        duration: 0.5,
+        duration: 0.6,
+        ease: "power2.out",
         delay: index * 0.1
       }
     );
-
-    // Scramble / Decode Text Effect
-    const scrambleObj = { value: 0 };
-    gsap.to(scrambleObj, {
-      scrollTrigger: {
-        trigger: card,
-        start: 'top 75%',
-        end: 'bottom 55%',
-        scrub: 1,
-      },
-      value: 1,
-      onUpdate: () => {
-        const progress = scrambleObj.value;
-        const currentText = finalText.split('').map((char, i) => {
-          if (i < progress * finalText.length) return char;
-          return chars[Math.floor(Math.random() * chars.length)];
-        }).join('');
-
-        toTerm.innerText = currentText;
-
-        // Visual styles
-        if (progress > 0.8) {
-          toTerm.style.color = '#ff4d4d';
-          toTerm.style.textShadow = '0 0 8px rgba(255, 77, 77, 0.4)';
-          toTerm.style.opacity = 1;
-          toTerm.style.filter = 'blur(0px)';
-        } else {
-          toTerm.style.color = '#ffffff';
-          toTerm.style.textShadow = 'none';
-          toTerm.style.opacity = 0.5 + (progress * 0.5);
-          toTerm.style.filter = `blur(${2 - (progress * 2)}px)`;
-        }
-      }
-    });
   });
-
 };
 
 const initWorkAnimations = () => {
@@ -694,6 +647,49 @@ const initGallerySlider = () => {
   startSlider();
 };
 
+const initCursor = () => {
+  const cursor = document.getElementById('custom-cursor');
+  if (!cursor) return;
+
+  // Mark body to hide default cursor CSS rules we added
+  document.body.classList.add('custom-cursor-active');
+
+  // GSAP quickTo for very smooth tracking
+  const xTo = gsap.quickTo(cursor, "x", { duration: 0.15, ease: "power3" }, "-=10");
+  const yTo = gsap.quickTo(cursor, "y", { duration: 0.15, ease: "power3" }, "-=10");
+
+  let isFirstMove = true;
+
+  window.addEventListener("mousemove", (e) => {
+    if (isFirstMove) {
+      cursor.style.visibility = 'visible';
+      isFirstMove = false;
+    }
+    xTo(e.clientX - 10);
+    yTo(e.clientY - 10);
+  });
+
+  const interactives = document.querySelectorAll('a, button, .transform-card, .mv-gallery-card');
+  interactives.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      gsap.to(cursor, {
+        scale: 2.5,
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        border: '1px solid rgba(255, 255, 255, 0.4)',
+        duration: 0.2
+      });
+    });
+    el.addEventListener('mouseleave', () => {
+      gsap.to(cursor, {
+        scale: 1,
+        backgroundColor: 'rgba(255, 255, 255, 0.8)',
+        border: 'none',
+        duration: 0.2
+      });
+    });
+  });
+};
+
 // --- Main Init ---
 
 const init = () => {
@@ -708,6 +704,7 @@ const init = () => {
     animationsInitialized = true;
     // console.log('Running animations...');
 
+    initCursor();
     initHeroAnimations();
     initNarrativeReveal();
     initBridgeAnimations();
