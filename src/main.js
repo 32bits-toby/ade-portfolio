@@ -645,6 +645,55 @@ const initGeneral = () => {
   }
 };
 
+const initGallerySlider = () => {
+  const slides = document.querySelectorAll('.mv-slide');
+  const dots = document.querySelectorAll('.mv-dot');
+
+  if (slides.length === 0 || dots.length === 0) return;
+
+  let currentSlide = 0;
+  let slideInterval;
+  const slideDuration = 5000;
+
+  const goToSlide = (index) => {
+    // Remove active class from all
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    // Add active class to target
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  };
+
+  const nextSlide = () => {
+    const nextIndex = (currentSlide + 1) % slides.length;
+    goToSlide(nextIndex);
+  };
+
+  // Start auto-cycling
+  const startSlider = () => {
+    slideInterval = setInterval(nextSlide, slideDuration);
+  };
+
+  // Stop auto-cycling
+  const stopSlider = () => {
+    clearInterval(slideInterval);
+  };
+
+  // Add click events to dots
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      stopSlider();
+      goToSlide(index);
+      startSlider(); // Restart interval after manual click
+    });
+  });
+
+  // Initialize
+  startSlider();
+};
+
 // --- Main Init ---
 
 const init = () => {
@@ -664,6 +713,7 @@ const init = () => {
     initBridgeAnimations();
     initWorkAnimations();
     initDockAnimations();
+    initGallerySlider();
 
     ScrollTrigger.refresh();
 

@@ -128,8 +128,14 @@
           Dashboards that tell the story. Models that flag what matters. Reports your team will actually use.
         </p>
         <div class="hero-stack reveal-text delay-2">
-          <span class="hero-stack-label">Tools I work with</span>
-          <p class="hero-stack-items">Python • SQL • Power BI • Excel • Pandas • Machine Learning</p>
+          <div class="hero-stack-items">
+            <span class="hero-stack-pill">Python</span>
+            <span class="hero-stack-pill">SQL</span>
+            <span class="hero-stack-pill">Power BI</span>
+            <span class="hero-stack-pill">Excel</span>
+            <span class="hero-stack-pill">Pandas</span>
+            <span class="hero-stack-pill">Machine Learning</span>
+          </div>
         </div>
       </div>
 
@@ -138,99 +144,71 @@
       </div>
     </div>
 
-    <section class="gallery-section container" id="work">
-      <div class="gallery-header reveal-text delay-1">
-        <h2 class="section-label">Selected Projects</h2>
-        <span class="gallery-count">(4)</span>
+    <section class="mv-gallery-section container" id="work">
+      <div class="mv-gallery-card reveal-text delay-1">
+        <div class="mv-slides-container" id="mv-gallery-slider">
+          <!-- Slide 1 -->
+          <a href="/project.html?slug=sales-performance-dashboard" class="mv-slide active">
+            <img src="/assets/design-1.svg" alt="Sales Performance Dashboard" class="mv-slide-image">
+            <div class="mv-slide-overlay">
+              <h3 class="mv-slide-title">Sales Performance Dashboard</h3>
+              <div class="mv-slide-tags">
+                <span>Power BI</span>
+                <span>SQL</span>
+                <span>Excel</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Slide 2 -->
+          <a href="/project.html?slug=customer-churn-prediction" class="mv-slide">
+            <img src="/assets/design-2.svg" alt="Customer Churn Prediction Model" class="mv-slide-image">
+            <div class="mv-slide-overlay">
+              <h3 class="mv-slide-title">Customer Churn Prediction Model</h3>
+              <div class="mv-slide-tags">
+                <span>Python</span>
+                <span>Pandas</span>
+                <span>Scikit-learn</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Slide 3 -->
+          <a href="/project.html?slug=marketing-campaign-roi-tracker" class="mv-slide">
+            <img src="/assets/design-3.svg" alt="Marketing Campaign ROI Tracker" class="mv-slide-image">
+            <div class="mv-slide-overlay">
+              <h3 class="mv-slide-title">Marketing Campaign ROI Tracker</h3>
+              <div class="mv-slide-tags">
+                <span>Power BI</span>
+                <span>SQL</span>
+                <span>DAX</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Slide 4 -->
+          <a href="/project.html?slug=retail-inventory-optimization" class="mv-slide">
+            <img src="/assets/design-4.svg" alt="Retail Inventory Optimization" class="mv-slide-image">
+            <div class="mv-slide-overlay">
+              <h3 class="mv-slide-title">Retail Inventory Optimization</h3>
+              <div class="mv-slide-tags">
+                <span>Python</span>
+                <span>Excel</span>
+                <span>SQL</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="mv-gallery-dots" id="mv-gallery-dots">
+          <button class="mv-dot active" data-index="0" aria-label="Go to slide 1"></button>
+          <button class="mv-dot" data-index="1" aria-label="Go to slide 2"></button>
+          <button class="mv-dot" data-index="2" aria-label="Go to slide 3"></button>
+          <button class="mv-dot" data-index="3" aria-label="Go to slide 4"></button>
+        </div>
       </div>
 
-      <div class="gallery-stack">
-        <a href="/project.html?slug=sales-performance-dashboard" class="gallery-item reveal-text">
-          <div class="gallery-marquee" aria-hidden="true">
-            <span>SALES DASHBOARD &nbsp;&middot;&nbsp; SALES DASHBOARD &nbsp;&middot;&nbsp; SALES DASHBOARD
-              &nbsp;&middot;&nbsp; SALES DASHBOARD &nbsp;&middot;&nbsp; SALES DASHBOARD &nbsp;&middot;&nbsp; SALES
-              DASHBOARD &nbsp;&middot;&nbsp;</span>
-          </div>
-          <div class="gallery-card">
-            <div class="gallery-image">
-              <img src="/assets/design-1.svg" alt="Sales Performance Dashboard">
-            </div>
-            <div class="gallery-info">
-              <h3 class="gallery-name">Sales Performance Dashboard</h3>
-              <div class="gallery-tags">
-                <span class="gallery-tag">Power BI</span>
-                <span class="gallery-tag">SQL</span>
-                <span class="gallery-tag">Excel</span>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="/project.html?slug=customer-churn-prediction" class="gallery-item reveal-text">
-          <div class="gallery-marquee" aria-hidden="true">
-            <span>CHURN PREDICTION &nbsp;&middot;&nbsp; CHURN PREDICTION &nbsp;&middot;&nbsp; CHURN PREDICTION
-              &nbsp;&middot;&nbsp; CHURN PREDICTION &nbsp;&middot;&nbsp; CHURN PREDICTION &nbsp;&middot;&nbsp; CHURN
-              PREDICTION &nbsp;&middot;&nbsp;</span>
-          </div>
-          <div class="gallery-card">
-            <div class="gallery-image">
-              <img src="/assets/design-2.svg" alt="Customer Churn Prediction Model">
-            </div>
-            <div class="gallery-info">
-              <h3 class="gallery-name">Customer Churn Prediction Model</h3>
-              <div class="gallery-tags">
-                <span class="gallery-tag">Python</span>
-                <span class="gallery-tag">Pandas</span>
-                <span class="gallery-tag">Scikit-learn</span>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="/project.html?slug=marketing-campaign-roi-tracker" class="gallery-item reveal-text">
-          <div class="gallery-marquee" aria-hidden="true">
-            <span>ROI TRACKER &nbsp;&middot;&nbsp; ROI TRACKER &nbsp;&middot;&nbsp; ROI TRACKER &nbsp;&middot;&nbsp; ROI
-              TRACKER &nbsp;&middot;&nbsp; ROI TRACKER &nbsp;&middot;&nbsp; ROI TRACKER &nbsp;&middot;&nbsp; ROI TRACKER
-              &nbsp;&middot;&nbsp;</span>
-          </div>
-          <div class="gallery-card">
-            <div class="gallery-image">
-              <img src="/assets/design-3.svg" alt="Marketing Campaign ROI Tracker">
-            </div>
-            <div class="gallery-info">
-              <h3 class="gallery-name">Marketing Campaign ROI Tracker</h3>
-              <div class="gallery-tags">
-                <span class="gallery-tag">Power BI</span>
-                <span class="gallery-tag">SQL</span>
-                <span class="gallery-tag">DAX</span>
-              </div>
-            </div>
-          </div>
-        </a>
-
-        <a href="/project.html?slug=retail-inventory-optimization" class="gallery-item reveal-text">
-          <div class="gallery-marquee" aria-hidden="true">
-            <span>INVENTORY OPT &nbsp;&middot;&nbsp; INVENTORY OPT &nbsp;&middot;&nbsp; INVENTORY OPT
-              &nbsp;&middot;&nbsp; INVENTORY OPT &nbsp;&middot;&nbsp; INVENTORY OPT &nbsp;&middot;&nbsp; INVENTORY OPT
-              &nbsp;&middot;&nbsp;</span>
-          </div>
-          <div class="gallery-card">
-            <div class="gallery-image">
-              <img src="/assets/design-4.svg" alt="Retail Inventory Optimization">
-            </div>
-            <div class="gallery-info">
-              <h3 class="gallery-name">Retail Inventory Optimization</h3>
-              <div class="gallery-tags">
-                <span class="gallery-tag">Python</span>
-                <span class="gallery-tag">Excel</span>
-                <span class="gallery-tag">SQL</span>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="gallery-footer reveal-text delay-1">
+      <div class="mv-gallery-footer reveal-text delay-1">
         <a href="/projects.html" class="gallery-see-all">See all projects <span class="arrow">&rarr;</span></a>
       </div>
     </section>
@@ -241,12 +219,13 @@
           <h3 class="narrative-label reveal-text">About Me</h3>
         </div>
         <div class="narrative-content">
-          <p class="gsap-text-reveal semibold-narrative" id="special-text"><span class="text-bright">I’m Ade. I help
-              businesses cut through the noise in their data and find answers that move things forward.</span></p>
+          <p class="gsap-text-reveal semibold-narrative" id="special-text"><span class="text-bright">I'm Ade. I help
+              businesses cut through the noise in their data and find answers that actually move things forward.</span>
+          </p>
 
-          <p class="gsap-text-reveal semibold-narrative"><span class="text-bright">Whether it’s building dashboards your
-              stakeholders will actually open, or flagging risks before they cost you — I use Python, SQL, Power BI, and
-              Excel to make that happen.</span></p>
+          <p class="gsap-text-reveal semibold-narrative"><span class="text-bright">Whether it's building dashboards your
+              stakeholders will open more than once, or catching risks before they turn into problems, I use Python,
+              SQL, Power BI, and Excel to make it happen.</span></p>
 
           <div class="narrative-links reveal-text delay-1">
             <a href="/projects.html" class="narrative-pill">View Projects</a>
