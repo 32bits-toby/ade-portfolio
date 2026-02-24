@@ -14,11 +14,11 @@ const initHeroAnimations = () => {
   const rotatorEl = document.getElementById('hero-rotator-text');
   if (rotatorEl) {
     const phrases = [
-      'Architecture & design reviews from a security perspective',
-      'Threat modeling for product and protocol decisions',
-      'Flow-level and state-level security analysis',
-      'UX and product patterns that reduce attack surface',
-      'Security guidance before, during, and after implementation'
+      'Data analysis, dashboards, and business-focused insights',
+      'SQL and Python workflows for reliable reporting',
+      'Power BI storytelling for clear stakeholder decisions',
+      'Messy data cleaning and transformation into analysis-ready tables',
+      'Predictive modeling experiments for practical business outcomes'
     ];
     const scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&*';
     let currentIndex = 0;
