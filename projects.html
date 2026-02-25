@@ -6,6 +6,11 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Ade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
 </head>
 
 <body class="portfolio-page projects-page">
@@ -39,14 +44,18 @@
       <div class="subpage-heading reveal-text in-view">
         <p class="section-label">Projects</p>
         <h1 class="subpage-title">Proof of Work</h1>
-        <p class="subpage-subtitle">Nine data analysis and data science projects with concise summaries and direct
-          links to dashboards, GitHub, and write-ups.</p>
+        <p class="subpage-subtitle">Real problems. Real data. End-to-end work across business intelligence,<br>
+          machine learning, and analytics — each project built to answer something that matters.</p>
+        <div class="pp-filter-row" id="filter-row">
+          <!-- injected by src/projectsPage.js -->
+        </div>
       </div>
     </header>
 
     <section class="container projects-grid-section" id="projects-list">
       <!-- injected by src/projectsPage.js -->
     </section>
+    <div class="container pp-count" id="projects-count"></div>
 
     <footer class="editorial-footer">
       <div class="footer-content container">

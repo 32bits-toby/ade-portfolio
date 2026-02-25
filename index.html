@@ -6,6 +6,11 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ade | Data Analyst Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
   <style>
     .preloader {
       position: fixed;
@@ -209,7 +214,7 @@
       </div>
 
       <div class="mv-gallery-footer reveal-text delay-1">
-        <a href="/projects.html" class="gallery-see-all">See all projects <span class="arrow">&rarr;</span></a>
+        <a href="/projects.html" class="btn-pill">View All Projects ↗</a>
       </div>
     </section>
 
@@ -298,8 +303,9 @@
 
         <div class="availability-right">
           <div class="availability-content reveal-text">
-            <div class="availability-location">
-              Open to analyst roles <span class="availability-status">(available to work)</span>
+            <div class="availability-location" style="display: flex; flex-direction: column; align-items: flex-start;">
+              <span class="availability-status" style="margin-left: 0; margin-bottom: 8px;">(available to work)</span>
+              <span>Open to analyst roles</span>
             </div>
             <div class="availability-time" id="live-time"></div>
           </div>

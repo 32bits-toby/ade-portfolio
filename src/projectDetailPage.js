@@ -257,6 +257,7 @@ if (root) {
           </div>
 
           <div class="case-study-hero-inner container reveal-text in-view">
+            <a href="/projects.html" class="cs-back-link">← Back to Projects</a>
             <h1 class="case-study-title">${project.title}</h1>
 
             <div class="case-study-meta-grid">

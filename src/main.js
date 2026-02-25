@@ -111,27 +111,31 @@ const initHeroAnimations = () => {
     });
   }
 
-  // Hero Character Grid Animation (Immunefi-style)
+  // Hero Character Grid Animation (Replaced with Data Constellation)
   const canvas = document.getElementById('hero-waves');
   if (canvas) {
     const ctx = canvas.getContext('2d');
     let width, height;
-    let cols, rows;
-    const CELL_SIZE = 14; // Size of each character cell
-    const CHARS = '$/:.|0&x\\#%>=<~^*+-?!{}[]()'.split('');
-    const FONT_SIZE = 11;
+    let nodes = [];
+    const NODE_COUNT = 150;
+    const CONNECTION_DISTANCE = 110;
+    const SPOTLIGHT_RADIUS = 300;
 
     // Mouse tracking with smoothing
     let mouseX = -9999, mouseY = -9999;
     let targetMouseX = -9999, targetMouseY = -9999;
 
-    // Grid data: each cell stores its current character and a noise seed
-    let grid = [];
-
-    // Precalculate noise offsets for flickering
-    function pseudoRandom(x, y, t) {
-      const n = Math.sin(x * 12.9898 + y * 78.233 + t * 0.001) * 43758.5453;
-      return n - Math.floor(n);
+    function initNodes() {
+      nodes = [];
+      for (let i = 0; i < NODE_COUNT; i++) {
+        nodes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.6,
+          vy: (Math.random() - 0.5) * 0.6,
+          radius: Math.random() * 1.5 + 0.8
+        });
+      }
     }
 
     function resize() {
@@ -142,21 +146,7 @@ const initHeroAnimations = () => {
       canvas.height = height * dpr;
       ctx.scale(dpr, dpr);
 
-      cols = Math.ceil(width / CELL_SIZE) + 1;
-      rows = Math.ceil(height / CELL_SIZE) + 1;
-
-      // Initialize grid
-      grid = [];
-      for (let r = 0; r < rows; r++) {
-        grid[r] = [];
-        for (let c = 0; c < cols; c++) {
-          grid[r][c] = {
-            char: CHARS[Math.floor(Math.random() * CHARS.length)],
-            seed: Math.random() * 1000,
-            lastSwap: Math.random() * 5000
-          };
-        }
-      }
+      initNodes();
     }
 
     // Listen to mouse movement on the hero section
@@ -173,7 +163,7 @@ const initHeroAnimations = () => {
       });
     }
 
-    function animate(timestamp) {
+    function animate() {
       // Smooth mouse interpolation
       if (targetMouseX > -9000) {
         mouseX += (targetMouseX - mouseX) * 0.08;
@@ -183,55 +173,74 @@ const initHeroAnimations = () => {
         mouseY += (targetMouseY - mouseY) * 0.05;
       }
 
-      // Clear with black
-      ctx.fillStyle = '#000';
-      ctx.fillRect(0, 0, width, height);
+      // Clear the canvas
+      ctx.clearRect(0, 0, width, height);
 
-      ctx.font = `${FONT_SIZE}px "SF Mono", "Fira Code", "Cascadia Code", Consolas, "Courier New", monospace`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
+      // Update and draw nodes
+      for (let i = 0; i < nodes.length; i++) {
+        let node = nodes[i];
 
-      const time = timestamp || 0;
-      const spotlightRadius = 280; // Radius of the mouse spotlight
-      const spotlightFalloff = 1.6; // How quickly it fades
+        node.x += node.vx;
+        node.y += node.vy;
 
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const cx = c * CELL_SIZE + CELL_SIZE / 2;
-          const cy = r * CELL_SIZE + CELL_SIZE / 2;
-          const cell = grid[r][c];
+        // Bounce off edges gently
+        if (node.x < 0 || node.x > width) node.vx *= -1;
+        if (node.y < 0 || node.y > height) node.vy *= -1;
 
-          // Randomly swap characters over time
-          if (time - cell.lastSwap > 2000 + cell.seed * 3) {
-            cell.char = CHARS[Math.floor(Math.random() * CHARS.length)];
-            cell.lastSwap = time;
-            cell.seed = Math.random() * 1000;
+        // Ensure they don't get stuck out of bounds
+        node.x = Math.max(0, Math.min(width, node.x));
+        node.y = Math.max(0, Math.min(height, node.y));
+
+        // Distance from node to mouse
+        const dx = node.x - mouseX;
+        const dy = node.y - mouseY;
+        const distToMouse = Math.sqrt(dx * dx + dy * dy);
+
+        // Calculate opacity based on spotlight
+        const baseOpacity = 0.15;
+        let spotOpacity = 0;
+
+        if (distToMouse < SPOTLIGHT_RADIUS) {
+          spotOpacity = Math.pow(1 - distToMouse / SPOTLIGHT_RADIUS, 1.4) * 0.7;
+        }
+
+        const finalNodeOpacity = Math.min(1, baseOpacity + spotOpacity);
+
+        // Draw Node (subtle olive green for points)
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(141, 184, 58, ${finalNodeOpacity})`;
+        ctx.fill();
+
+        // Check connections with other nodes
+        for (let j = i + 1; j < nodes.length; j++) {
+          let node2 = nodes[j];
+          const dx2 = node.x - node2.x;
+          const dy2 = node.y - node2.y;
+          const distBetweenNodes = Math.sqrt(dx2 * dx2 + dy2 * dy2);
+
+          if (distBetweenNodes < CONNECTION_DISTANCE) {
+            // Find the center point of the connection to calculate spotlight interaction
+            const cx = (node.x + node2.x) / 2;
+            const cy = (node.y + node2.y) / 2;
+            const distCenterToMouse = Math.sqrt((cx - mouseX) ** 2 + (cy - mouseY) ** 2);
+
+            if (distCenterToMouse < SPOTLIGHT_RADIUS) {
+              const lineSpotOpacity = Math.pow(1 - distCenterToMouse / SPOTLIGHT_RADIUS, 1.5) * 0.35;
+              const distanceFalloff = 1 - (distBetweenNodes / CONNECTION_DISTANCE);
+              const finalLineOpacity = lineSpotOpacity * distanceFalloff;
+
+              if (finalLineOpacity > 0.01) {
+                ctx.beginPath();
+                ctx.moveTo(node.x, node.y);
+                ctx.lineTo(node2.x, node2.y);
+                // Draw connecting lines in white to contrast the green nodes
+                ctx.strokeStyle = `rgba(255, 255, 255, ${finalLineOpacity})`;
+                ctx.lineWidth = 0.8;
+                ctx.stroke();
+              }
+            }
           }
-
-          // Distance from mouse for spotlight
-          const dx = cx - mouseX;
-          const dy = cy - mouseY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          // Spotlight brightness (0 to 1)
-          let spotBrightness = 0;
-          if (dist < spotlightRadius) {
-            spotBrightness = Math.pow(1 - dist / spotlightRadius, spotlightFalloff);
-          }
-
-          // Flicker noise (subtle per-character brightness modulation)
-          const flicker = pseudoRandom(c, r, time * 0.5) * 0.3 + 0.7;
-
-          // Base ambient brightness (very dim)
-          const ambient = 0.04 + pseudoRandom(c * 3, r * 7, time * 0.2) * 0.04;
-
-          // Final alpha
-          const alpha = Math.min(1, ambient + spotBrightness * 0.9 * flicker);
-
-          if (alpha < 0.01) continue; // Skip invisible chars
-
-          ctx.fillStyle = `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
-          ctx.fillText(cell.char, cx, cy);
         }
       }
 

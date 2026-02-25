@@ -1,6 +1,7 @@
 export const projects = [
   {
     slug: 'sales-performance-dashboard',
+    type: 'Business Intelligence',
     title: 'Bike Sales Analysis Dashboard',
     timeline: '~10 months ago',
     tools: ['Power BI', 'Excel', 'Power Query'],
@@ -44,6 +45,7 @@ export const projects = [
   },
   {
     slug: 'customer-churn-prediction',
+    type: 'Machine Learning',
     title: 'Rate of Penetration (ROP) Prediction for Drilling Operations',
     timeline: 'April 2025',
     tools: ['Python', 'Pandas', 'NumPy', 'Scikit-learn', 'Matplotlib', 'Seaborn', 'Streamlit'],
@@ -94,6 +96,7 @@ export const projects = [
   },
   {
     slug: 'marketing-campaign-roi-tracker',
+    type: 'Business Intelligence',
     title: 'Blinkit Business Intelligence & Operations Analysis',
     timeline: 'May 2025',
     tools: ['Power BI', 'Excel', 'Power Query'],
@@ -147,6 +150,7 @@ export const projects = [
   },
   {
     slug: 'retail-inventory-optimization',
+    type: 'Financial Analytics',
     title: 'Banking Revenue & Customer Insight Analysis',
     timeline: 'June 2025',
     tools: ['Power BI', 'Power Query', 'Excel', 'ZoomCharts'],
@@ -198,6 +202,7 @@ export const projects = [
   },
   {
     slug: 'loan-default-risk-model',
+    type: 'Healthcare Analytics',
     title: 'Sports Injuries: Trends, Recovery & Cost Analysis',
     timeline: 'August 2025',
     tools: ['Power BI', 'Power Query', 'Excel', 'ZoomCharts'],
@@ -252,6 +257,7 @@ export const projects = [
   },
   {
     slug: 'hr-attrition-analysis',
+    type: 'People Analytics',
     title: 'Employee Performance, Productivity & Attrition Analysis',
     timeline: 'September 2025',
     tools: ['Power BI', 'Power Query', 'Excel', 'ZoomCharts'],
@@ -302,6 +308,7 @@ export const projects = [
   },
   {
     slug: 'fraud-detection-exploration',
+    type: 'Machine Learning',
     title: 'Fraud Detection in Imbalanced Financial Transactions',
     timeline: '1 month ago',
     tools: ['Python', 'Pandas', 'Scikit-learn', 'XGBoost', 'Streamlit'],
@@ -357,6 +364,7 @@ export const projects = [
   },
   {
     slug: 'streamlit-kpi-monitor',
+    type: 'Operations Analytics',
     title: 'Animal Shelter Intake, Outcomes & Adoption Analysis',
     timeline: 'December 2025',
     tools: ['Power BI', 'Power Query', 'Excel', 'ZoomCharts'],
@@ -408,6 +416,7 @@ export const projects = [
   },
   {
     slug: 'pharmascope-analytics',
+    type: 'Business Intelligence',
     title: 'PharmaScope: Multi-Country Pharmacy Performance Analysis',
     timeline: 'February 2026',
     tools: ['Power BI', 'Power Query', 'Excel', 'ZoomCharts', 'Smart Frames UI'],
