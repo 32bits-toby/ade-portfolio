@@ -3,12 +3,195 @@ import { useState } from "react";
 // ─── DATA ──────────────────────────────────────────────────────────────────────
 const CASE_STUDIES = [
   {
+    id: "01",
+    title: "Bike Sales Analysis Dashboard",
+    timeline: "~10 months ago",
+    tools: ["Power BI", "Excel", "Power Query"],
+    summary:
+      "This project is a multi-page interactive Power BI dashboard designed to analyze bike sales performance across revenue, orders, and contribution metrics. The goal was to uncover sales trends, identify revenue leakage, and understand how products, brands, stores, and time periods contribute to overall performance.\n\nThe dashboard was built with a strong focus on usability, interactivity, and decision-making support.",
+    what: [
+      "Cleaned and prepared the sales dataset using Excel and Power Query",
+      "Designed a three-page Power BI report: revenue analysis, order trends, and staff & customer contribution",
+      "Implemented page navigation buttons, flip cards for KPI explanations, filters and slicers, and custom tooltips for deeper context",
+    ],
+    metrics: [],
+    insights: [
+      "Mountain and road bikes were the top revenue contributors",
+      "Lost revenue increased by 3.6%, indicating fulfillment or operational gaps",
+      "Sales activity peaked on Tuesdays and Saturdays",
+      "Certain brands consistently outperformed others across regions",
+      "Revenue performance varied significantly by state and store",
+    ],
+    outcomes: [
+      "Highlighted revenue leakage through lost orders",
+      "Identified high-performing products and stores for inventory prioritization",
+      "Recommended optimizing order fulfillment processes to reduce lost revenue",
+      "Suggested targeted marketing on high-traffic sales days",
+    ],
+    takeaway:
+      "Revenue tells only part of the story — lost orders and fulfillment gaps quietly erode what strong sales have built.",
+  },
+  {
+    id: "02",
+    title: "Rate of Penetration (ROP) Prediction for Drilling Operations",
+    timeline: "April 2025",
+    tools: ["Python", "Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "Streamlit"],
+    summary:
+      "This project focuses on building and deploying an end-to-end machine learning solution to predict Rate of Penetration (ROP) in drilling operations. The objective was to apply data science techniques to a real petroleum engineering problem and deliver a practical, deployable prediction tool.",
+    what: [
+      "Worked with a historical ROP dataset (~1,500 rows) and a separate 200-row test set without targets",
+      "Handled missing values through dropping and statistical imputation; encoded categoricals; scaled numerical features",
+      "Applied feature selection to identify key predictors",
+      "Tested up to 10 regression models on scaled and unscaled data — identified ExtraTreesRegressor as best-performing",
+      "Built a complete ML pipeline: imputation, encoding, scaling, and modeling",
+      "Tuned hyperparameters using RandomizedSearchCV",
+      "Deployed as a Streamlit app supporting manual single predictions and bulk CSV uploads",
+      "Saved reusable model assets: base pipeline, tuned pipeline, and hyperparameter search object",
+    ],
+    metrics: [
+      { label: "R² Score", value: "0.89" },
+      { label: "MAE", value: "1.37" },
+      { label: "MSE", value: "2.97" },
+      { label: "Test Set", value: "200 rows" },
+    ],
+    insights: [
+      "ExtraTreesRegressor outperformed all other tested regressors on this dataset",
+      "Feature selection meaningfully improved model stability",
+      "Pipeline design ensures the preprocessing and model stay aligned across training and deployment",
+      "Batch prediction on unseen data validated the model's generalization ability",
+    ],
+    outcomes: [
+      "Demonstrated how ML can be applied directly to petroleum engineering workflows",
+      "Delivered a production-ready prediction tool — not just a notebook",
+      "Showed the importance of proper pipeline design and rigorous model evaluation",
+    ],
+    takeaway:
+      "Applying machine learning to domain-specific engineering problems requires understanding the workflow first — the model is only as good as the pipeline behind it.",
+  },
+  {
+    id: "03",
+    title: "Blinkit Business Intelligence & Operations Analysis",
+    timeline: "May 2025",
+    tools: ["Power BI", "Excel", "Power Query"],
+    summary:
+      "This project is a comprehensive business intelligence dashboard built using a Blinkit dataset to analyze sales, marketing performance, operations, inventory, and customer behavior. What began as a sales performance review evolved into a full operational deep dive, uncovering hidden inefficiencies behind strong revenue numbers.\n\nThe dashboard was designed to help decision-makers quickly identify not just growth, but where value is silently being lost.",
+    what: [
+      "Cleaned and modeled multi-domain business data using Excel and Power Query",
+      "Designed a five-page Power BI dashboard: executive summary, sales, marketing, operations (delivery & inventory), and customer behavior",
+      "Implemented page navigation and bookmarks, Top/Bottom N dynamic views, custom tooltips, and interactive drill-downs",
+      "Structured insights to mirror real executive decision flows",
+    ],
+    metrics: [
+      { label: "Total Sales Revenue", value: "$11.0M" },
+      { label: "Campaign Revenue", value: "$32.1M" },
+      { label: "Campaign Margin", value: "49.3%" },
+      { label: "ROAS", value: "197.3%" },
+      { label: "Damaged Inventory", value: "54.4%" },
+      { label: "On-Time Delivery", value: "69.4%" },
+      { label: "Avg Customer Rating", value: "3.34 / 5" },
+    ],
+    insights: [
+      "Campaign profitability varied widely — some campaigns ran as low as 10% margin",
+      "54.4% of inventory was damaged, representing a major hidden operational cost",
+      "On-time delivery rate was 69.4%, with 9.8% significantly delayed",
+      "Top revenue states: Uttar Pradesh, Maharashtra, and West Bengal",
+      "Pet Treats led in revenue; toilet cleaners had high volume but thin margins",
+      "Frequent customer complaints: missing items, late delivery, and poor service",
+    ],
+    outcomes: [
+      "Revealed how strong revenue can mask serious backend inefficiencies",
+      "Flagged inventory damage as a major silent cost driver requiring immediate attention",
+      "Demonstrated the direct link between delivery performance and customer satisfaction",
+      "Reinforced that operational efficiency, not just sales, determines business health",
+    ],
+    takeaway:
+      "Revenue tells only half the story. What is wasted in operations can quietly erase the gains made by marketing and sales.",
+  },
+  {
+    id: "04",
+    title: "Banking Revenue & Customer Insight Analysis",
+    timeline: "June 2025",
+    tools: ["Power BI", "Power Query", "Excel", "ZoomCharts"],
+    summary:
+      "This project was built as part of FP20 Analytics Challenge 27 and marks my first participation in the challenge. The goal was to analyze banking transactions across revenue, customer behavior, transaction patterns, and performance trends.\n\nWhat made this project stand out was a key analytical correction: realizing that not every transaction represents revenue. That single insight reshaped the entire analysis and led to a far more accurate financial story.",
+    what: [
+      "Explored and validated transaction data before modeling revenue",
+      "Identified and separated Core Revenue (Loan Payments, Card Payments) from Fee-Based Revenue (Insurance Fees, Credit Card Fees, Late Payment Fees)",
+      "Built a multi-page Power BI dashboard: revenue & cost analysis, trends over time, transaction behavior by channel and product, customer insights and segmentation",
+      "Implemented a multi-currency toggle (USD / EUR) for dynamic analysis",
+      "Used advanced visuals, slicers, and interactive filters for decision-focused exploration",
+    ],
+    metrics: [
+      { label: "Core Revenue (USD)", value: "$37.58M" },
+      { label: "Fee Revenue (USD)", value: "$713K" },
+      { label: "Total Revenue (USD)", value: "$38.29M" },
+      { label: "Total Transactions", value: "$113.01M" },
+      { label: "Peak Month", value: "Apr 2025 — $4.25M" },
+      { label: "Period", value: "2023–2025" },
+    ],
+    insights: [
+      "Not every transaction is revenue — misclassifying them would have overstated income significantly",
+      "Murcia ranked highest by transactions and customers; Bilbao ranked lowest",
+      "Mobile and branch channels dominated transaction volume",
+      "High-income and middle-income segments drove the largest revenue share",
+      "April 2025 recorded the highest single-month transaction value",
+    ],
+    outcomes: [
+      "Prevented revenue overstatement by correctly classifying transaction types",
+      "Delivered a clearer and more trustworthy financial picture for decision-makers",
+      "Demonstrated how small analytical assumptions can lead to large reporting errors",
+      "Reinforced the importance of questioning metrics before visualizing them",
+    ],
+    takeaway:
+      "Accuracy in analytics begins with understanding the data — not rushing to conclusions.",
+  },
+  {
+    id: "05",
+    title: "Sports Injuries: Trends, Recovery & Cost Analysis",
+    timeline: "August 2025",
+    tools: ["Power BI", "Power Query", "Excel", "ZoomCharts"],
+    summary:
+      "This project was developed as part of FP20 Analytics Challenge 29, where I analyzed 15,000 recorded sports injury cases to uncover patterns in injury frequency, severity, recovery time, recurrence, and financial impact.\n\nRather than stopping at descriptive statistics, the goal was to tell a prevention-focused story: identifying where injuries repeat, who is most at risk, and how data can guide safer training and recovery strategies.",
+    what: [
+      "Cleaned and modeled a large multi-dimensional injury dataset (15,000 cases)",
+      "Built a multi-page Power BI dashboard: injury trends over time, recovery & treatment effectiveness, severity by sport, event, and surface, and geographic injury concentration & recurrence",
+      "Designed KPI flip cards, drill-downs by sport, country, season, and treatment, and severity & recurrence toggles",
+      "Structured insights to support injury prevention and cost reduction decisions",
+    ],
+    metrics: [
+      { label: "Total Cases", value: "15,000" },
+      { label: "Total Injury Cost", value: "€27.70M" },
+      { label: "Peak Season Cost", value: "€9.37M (2022–23)" },
+      { label: "Avg Recovery Time", value: "49 days" },
+      { label: "Most Frequent Injury", value: "Fractures (2,043)" },
+      { label: "Highest Recurrence", value: "UK — 21.94%" },
+    ],
+    insights: [
+      "Fractures were the most frequent injury (2,043 cases) and alone cost €3.6M",
+      "Athletics recorded the most injuries (3,041); competition events caused the most (5,101)",
+      "Indoor courts were the riskiest surface; clay surfaces showed the lowest injury counts",
+      "Female athletes accounted for 65.52% of all injuries; highest risk group: ages 31–35 (2,004 cases)",
+      "Boxing led in severe injuries; Achilles injuries had the longest recovery time (54 days)",
+      "Rest proved the most effective treatment at an average of 47 days recovery",
+      "UK had both the highest injury count (1,071) and highest recurrence rate (21.94%)",
+    ],
+    outcomes: [
+      "Injuries follow identifiable patterns and are not random — prevention is possible",
+      "High-cost, long-recovery injuries should be prioritized for targeted prevention programs",
+      "Female athletes and high-risk age groups require dedicated intervention strategies",
+      "Surface selection and training design directly influence injury rates",
+      "Rest and workload management significantly reduce recurrence",
+    ],
+    takeaway:
+      "Injury prevention is a data problem — and data can save careers, costs, and seasons.",
+  },
+  {
     id: "06",
     title: "Financial Fraud Detection with Machine Learning",
     timeline: "September 2025",
     tools: ["Python", "Pandas", "NumPy", "Scikit-learn", "Matplotlib", "Seaborn", "Streamlit", "Jupyter Notebook"],
     summary:
-      "Detecting fraud in highly imbalanced financial transaction data — where 95% accuracy hides a dangerous flaw. This project became an exploration of why accuracy alone is misleading and how model evaluation must align with real business risk.",
+      "This project tackles a classic but difficult problem: detecting fraud in highly imbalanced financial transaction data.\n\nAt first glance, the task seemed straightforward. With only about 4% fraudulent transactions, even a basic model achieved 95% accuracy. But deeper analysis revealed a dangerous flaw: the model was missing most actual fraud cases.\n\nThis project became an exploration of why accuracy alone is misleading in fraud detection and how model evaluation must align with real business risk.",
     what: [
       "Built and cleaned a dataset: 10,000 training + 1,500 test transactions",
       "Engineered features: transaction details, customer demographics, account behavior, device and risk indicators",
@@ -48,7 +231,7 @@ const CASE_STUDIES = [
     timeline: "September 2025",
     tools: ["Power BI", "Power Query", "Excel", "ZoomCharts"],
     summary:
-      "Developed for FP20 Analytics Challenge 30 — analyzing workforce performance, satisfaction, attrition, and business outcomes across departments and store locations. The goal: connect people performance to business performance.",
+      "This project was developed as part of FP20 Analytics Challenge 30, where I analyzed a comprehensive employee performance dataset covering workforce size, salaries, performance ratings, satisfaction, attrition, and business outcomes across multiple departments and store locations.\n\nThe goal was to move beyond headcount reporting and uncover how people performance connects to business performance — identifying who drives results, where attrition risk exists, and how compensation, training, and satisfaction influence outcomes.",
     what: [
       "Cleaned and modeled a multi-year employee dataset: demographics, roles, tenure, performance ratings, satisfaction scores, compensation, store-level sales",
       "Built a three-page Power BI dashboard: workforce overview & attrition, performance & training, employee- and store-level deep dives",
@@ -85,7 +268,7 @@ const CASE_STUDIES = [
     timeline: "December 2025",
     tools: ["Power BI", "Power Query", "Excel", "ZoomCharts"],
     summary:
-      "Built for the Onyx DataDNA Challenge — analyzing animal shelter operations to uncover patterns in intake, outcomes, adoption performance, and live release rates. The focus: understanding where pressure builds and how to turn insight into preparedness.",
+      "This project was built for the dataDNA Challenge by Onyx Data, where I analyzed an animal shelter operations dataset to uncover patterns in animal intake, shelter outcomes, adoption performance, and live release rates.\n\nThe objective was to move beyond surface-level counts and understand where pressure builds within the shelter system, how outcomes evolve over time, and what factors influence adoption and survival outcomes.\n\nThe final deliverable is a two-page interactive Power BI dashboard designed to support data-driven decision-making for shelter operations and animal welfare planning.",
     what: [
       "Cleaned and modeled multi-year shelter data: intake volume, type, condition, age group, jurisdiction, length of stay, seasonality",
       "Built a two-page Power BI dashboard: intake overview & trends, outcome performance & adoption analysis",
@@ -122,7 +305,7 @@ const CASE_STUDIES = [
     timeline: "February 2026",
     tools: ["Power BI", "Power Query", "Excel", "ZoomCharts", "Smart Frames UI"],
     summary:
-      "Completed for the Onyx DataDNA Challenge — analyzing a multi-country pharmacy network to understand revenue growth, profitability, operational efficiency, and risk concentration. The real question: is this growth sustainable?",
+      "This project was completed as part of the Onyx DataDNA Challenge, where I analyzed the business performance of a multi-country pharmacy network to understand revenue growth, profitability, operational efficiency, and risk concentration.\n\nThe objective went beyond visualizing growth. The real focus was identifying what is driving performance, where risk is concentrated, and whether growth is sustainable.",
     what: [
       "Modeled and analyzed multi-country pharmacy sales and transaction data",
       "Built a multi-page Power BI dashboard: revenue, profit, margin & volume trends; brand-level performance; country and pharmacy-type (Urban vs Rural) comparisons; product category and promotion performance",
@@ -228,7 +411,9 @@ const CaseStudyCard = ({ cs, defaultOpen = false }) => {
 
           {/* Summary */}
           <Section label="Summary">
-            <p style={s.prose}>{cs.summary}</p>
+            {cs.summary.split("\n\n").map((para, i) => (
+              <p key={i} style={{ ...s.prose, ...(i > 0 ? { marginTop: 10 } : {}) }}>{para}</p>
+            ))}
           </Section>
 
           {/* What I Did */}
