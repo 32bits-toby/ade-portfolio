@@ -9,9 +9,6 @@ if (projectsList) {
       .join('');
 
     const mediumButton = project.links.medium
-      ? `<a href="${project.links.medium}" class="project-link-btn" target="_blank" rel="noopener noreferrer">Medium</a>`
-      : '';
-
     return `
       <article class="project-card reveal-text">
         <a href="/project.html?slug=${project.slug}" class="project-card-media">

@@ -1,20 +1,125 @@
 import { projects } from './projectsData.js';
 
-const detailRoot = document.getElementById('project-detail-root');
+const root = document.getElementById('project-root');
+
+const renderNestedList = (items = []) => {
+  return items.map((item) => {
+    if (typeof item === 'string') {
+      return `<li>${item}</li>`;
+    }
+
+    if (item && Array.isArray(item.items)) {
+      const childItems = item.items.map((child) => `<li>${child}</li>`).join('');
+      return `
+        <li>
+          <span class="case-study-list-title">${item.title}</span>
+          <ul class="case-study-sublist">${childItems}</ul>
+        </li>
+      `;
+    }
+
+    return '';
+  }).join('');
+};
 
 const renderNotFound = () => {
-  if (!detailRoot) return;
+  if (!root) return;
 
-  detailRoot.innerHTML = `
-    <div class="project-detail-card reveal-text in-view">
-      <h1 class="project-detail-title">Project not found</h1>
-      <p class="project-detail-summary">The selected project does not exist yet. Return to the projects page and choose a valid project.</p>
-      <a href="/projects.html" class="project-link-btn inline-link">Back to Projects</a>
-    </div>
+  root.innerHTML = `
+    <section class="project-detail-section container">
+      <div class="project-detail-card reveal-text in-view case-study-notfound">
+        <h1 class="project-detail-title">Project not found</h1>
+        <p class="project-detail-summary">The selected project does not exist yet. Return to the projects page and choose a valid project.</p>
+        <a href="/projects.html" class="project-link-btn inline-link">Back to Projects</a>
+      </div>
+    </section>
   `;
 };
 
-if (detailRoot) {
+const initCaseStudyGallery = () => {
+  const track = document.querySelector('[data-gallery-track]');
+  if (!track) return;
+
+  const slides = Array.from(track.querySelectorAll('.case-study-slide'));
+  const prevBtn = document.querySelector('[data-gallery-prev]');
+  const nextBtn = document.querySelector('[data-gallery-next]');
+  const counter = document.querySelector('[data-gallery-counter]');
+  const gallerySection = document.querySelector('.case-study-gallery-section');
+
+  if (!prevBtn || !nextBtn || !counter || slides.length === 0 || !gallerySection) return;
+
+  let currentIndex = 0;
+
+  if (slides.length <= 1) {
+    gallerySection.classList.add('is-single');
+  }
+
+  const update = () => {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    counter.textContent = `${currentIndex + 1} / ${slides.length}`;
+
+    const atStart = currentIndex === 0;
+    const atEnd = currentIndex === slides.length - 1;
+    const singleSlide = slides.length <= 1;
+
+    prevBtn.disabled = atStart || singleSlide;
+    nextBtn.disabled = atEnd || singleSlide;
+
+    // Update dot indicators
+    const dots = document.querySelectorAll('.case-study-gallery-dot');
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('is-active', i === currentIndex);
+    });
+  };
+
+  prevBtn.addEventListener('click', () => {
+    currentIndex = Math.max(0, currentIndex - 1);
+    update();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentIndex = Math.min(slides.length - 1, currentIndex + 1);
+    update();
+  });
+
+  update();
+
+  // Create dot indicators
+  const dotsContainer = document.querySelector('.case-study-gallery-dots');
+  if (dotsContainer) {
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = `case-study-gallery-dot${i === 0 ? ' is-active' : ''}`;
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => {
+        currentIndex = i;
+        update();
+      });
+      dotsContainer.appendChild(dot);
+    });
+  }
+};
+
+const getProjectGalleryImages = (project) => {
+  const defaults = ['/assets/design-1.svg', '/assets/design-2.svg', '/assets/design-3.svg', '/assets/design-4.svg'];
+  const fromProject = Array.isArray(project.images) && project.images.length > 0
+    ? project.images.filter(Boolean)
+    : [project.image].filter(Boolean);
+
+  const images = [...fromProject];
+
+  for (let i = 0; i < defaults.length && images.length < 4; i++) {
+    images.push(defaults[i]);
+  }
+
+  if (images.length === 0) {
+    return defaults;
+  }
+
+  return images.slice(0, 4);
+};
+
+if (root) {
   const params = new URLSearchParams(window.location.search);
   const slug = params.get('slug');
 
@@ -26,51 +131,184 @@ if (detailRoot) {
     if (!project) {
       renderNotFound();
     } else {
+      const caseStudy = project.caseStudy || {};
+
+      // Extract data — prefer caseStudy fields, fall back to project-level
+      const summaryText = typeof caseStudy.summary === 'string'
+        ? caseStudy.summary
+        : (Array.isArray(caseStudy.summary) ? caseStudy.summary.join(' ') : (project.projectSummary || project.summary));
+
+      const whatItems = Array.isArray(caseStudy.what) ? caseStudy.what : [];
+      const metrics = Array.isArray(caseStudy.metrics) ? caseStudy.metrics : [];
+      const insightItems = Array.isArray(caseStudy.insights) ? caseStudy.insights : project.keyInsights;
+      const outcomeItems = Array.isArray(caseStudy.outcomes) ? caseStudy.outcomes : [];
+      const takeaway = caseStudy.takeaway || project.outcome;
+
       const toolTags = project.tools
-        .map((tool) => `<span class="project-tool">${tool}</span>`)
+        .map((tool) => `<li>${tool}</li>`)
         .join('');
 
-      const keyInsights = project.keyInsights
-        .map((insight) => `<li>${insight}</li>`)
-        .join('');
+      const linksHtml = [
+        project.links.dashboard
+          ? `<a href="${project.links.dashboard}" class="case-study-link" target="_blank" rel="noopener noreferrer">Dashboard</a>`
+          : '',
+        project.links.medium
+          ? `<a href="${project.links.medium}" class="case-study-link" target="_blank" rel="noopener noreferrer">Write-up</a>`
+          : '',
+        project.links.github
+          ? `<a href="${project.links.github}" class="case-study-link" target="_blank" rel="noopener noreferrer">GitHub</a>`
+          : ''
+      ].join('');
 
-      const mediumButton = project.links.medium
-        ? `<a href="${project.links.medium}" class="project-link-btn" target="_blank" rel="noopener noreferrer">Medium</a>`
-        : '';
+      const images = getProjectGalleryImages(project);
 
-      detailRoot.innerHTML = `
-        <article class="project-detail-card reveal-text in-view">
-          <div class="project-detail-media">
-            <img src="${project.image}" alt="${project.title}">
-          </div>
-          <div class="project-detail-header">
-            <h1 class="project-detail-title">${project.title}</h1>
-            <p class="project-timeline">${project.timeline}</p>
-            <div class="project-tools">${toolTags}</div>
-          </div>
+      const sliderHtml = images.map((imgSrc, index) => `
+        <figure class="case-study-slide">
+          <img src="${imgSrc}" alt="${project.title} screenshot ${index + 1}">
+        </figure>
+      `).join('');
 
-          <div class="project-detail-block">
-            <h2>Project summary</h2>
-            <p class="project-detail-summary">${project.projectSummary}</p>
-          </div>
+      // Helper: render em-dash bullet list
+      const renderDashList = (items) => items.map((item) => `
+        <li class="cs-list-item">
+          <span class="cs-bullet">—</span>
+          <span>${item}</span>
+        </li>
+      `).join('');
 
-          <div class="project-detail-block">
-            <h2>Key insights</h2>
-            <ul class="project-insights-list">${keyInsights}</ul>
+      // Build sections
+      const summarySection = `
+        <div class="cs-section">
+          <div class="cs-label">Summary</div>
+          <div class="cs-body">
+            <p class="cs-prose">${summaryText}</p>
           </div>
-
-          <div class="project-detail-block">
-            <h2>Outcome / takeaway</h2>
-            <p class="project-detail-summary">${project.outcome}</p>
-          </div>
-
-          <div class="project-links">
-            <a href="${project.links.dashboard}" class="project-link-btn" target="_blank" rel="noopener noreferrer">View Dashboard</a>
-            <a href="${project.links.github}" class="project-link-btn" target="_blank" rel="noopener noreferrer">GitHub</a>
-            ${mediumButton}
-          </div>
-        </article>
+        </div>
       `;
+
+      const whatSection = whatItems.length > 0 ? `
+        <div class="cs-section">
+          <div class="cs-label">What I Did</div>
+          <div class="cs-body">
+            <ul class="cs-list">${renderDashList(whatItems)}</ul>
+          </div>
+        </div>
+      ` : '';
+
+      const metricsSection = metrics.length > 0 ? `
+        <div class="cs-section">
+          <div class="cs-label">Key Metrics</div>
+          <div class="cs-body">
+            <div class="cs-metrics-grid">
+              ${metrics.map((m) => `
+                <div class="cs-metric-card">
+                  <div class="cs-metric-value">${m.value}</div>
+                  <div class="cs-metric-label">${m.label}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      ` : '';
+
+      const insightsSection = insightItems.length > 0 ? `
+        <div class="cs-section">
+          <div class="cs-label">Key Insights</div>
+          <div class="cs-body">
+            <ul class="cs-list">${renderDashList(insightItems)}</ul>
+          </div>
+        </div>
+      ` : '';
+
+      const outcomesSection = outcomeItems.length > 0 ? `
+        <div class="cs-section">
+          <div class="cs-label">Outcomes &amp; Recommendations</div>
+          <div class="cs-body">
+            <ul class="cs-list">${renderDashList(outcomeItems)}</ul>
+          </div>
+        </div>
+      ` : '';
+
+      const takeawaySection = takeaway ? `
+        <div class="cs-takeaway">
+          <span class="cs-takeaway-icon">↳</span>
+          <p class="cs-takeaway-text">${takeaway}</p>
+        </div>
+      ` : '';
+
+      const contentSectionHtml = `
+        <section class="case-study-content container reveal-text in-view delay-2">
+          <div class="cs-body-inner">
+            ${summarySection}
+            ${whatSection}
+            ${metricsSection}
+            ${insightsSection}
+            ${outcomesSection}
+            ${takeawaySection}
+          </div>
+        </section>
+      `;
+
+      root.innerHTML = `
+        <header class="case-study-hero">
+          <div class="hero-nav subpage-nav case-study-nav">
+            <div class="menu-trigger" style="cursor: pointer;"><span class="menu-icon">=</span> Menu</div>
+            <a href="/" class="logo-initials">ade.</a>
+          </div>
+
+          <div class="case-study-hero-inner container reveal-text in-view">
+            <h1 class="case-study-title">${project.title}</h1>
+
+            <div class="case-study-meta-grid">
+              <div class="case-study-meta-col">
+                <h4 class="meta-label">Timeline</h4>
+                <p class="meta-value">${project.timeline}</p>
+              </div>
+
+              <div class="case-study-meta-col">
+                <h4 class="meta-label">Tools</h4>
+                <ul class="meta-list">${toolTags}</ul>
+              </div>
+
+              <div class="case-study-meta-col">
+                <h4 class="meta-label">Links</h4>
+                <div class="meta-links">${linksHtml}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="scroll-indicator">
+            <div class="scroll-dot"></div>
+          </div>
+        </header>
+
+        <section class="case-study-gallery-section container reveal-text in-view delay-1">
+          <div class="case-study-gallery-viewport">
+            <button class="case-study-gallery-btn case-study-gallery-btn-prev" data-gallery-prev aria-label="Previous slide">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+
+            <div class="case-study-gallery-track" data-gallery-track>
+              ${sliderHtml}
+            </div>
+
+            <button class="case-study-gallery-btn case-study-gallery-btn-next" data-gallery-next aria-label="Next slide">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18l6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+
+          <p class="case-study-gallery-counter" data-gallery-counter></p>
+          <div class="case-study-gallery-dots"></div>
+        </section>
+
+        ${contentSectionHtml}
+      `;
+
+      initCaseStudyGallery();
     }
   }
 }
