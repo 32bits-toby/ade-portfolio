@@ -3087,39 +3087,88 @@ body.home-page .bridge-section {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: start;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
 .meta-list li {
-  font-size: 0.9rem;
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 0.82rem;
   letter-spacing: 0;
+  color: #bbb;
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  line-height: 1;
 }
 
 .meta-links {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: start;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
 }
 
-.case-study-link {
-  display: block;
-  width: fit-content;
-  font-family: var(--font-sans);
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.86);
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-  padding-bottom: 1px;
-  transition: opacity 0.2s ease, border-color 0.2s ease;
+.meta-link-wrapper {
+  position: relative;
+  display: inline-flex;
 }
 
-.case-study-link:hover {
+.meta-link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background-color: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: #bbb;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
+}
+
+.meta-link-icon:hover {
+  border-color: #8db83a;
+  color: #8db83a;
+  background-color: rgba(141, 184, 58, 0.05);
+}
+
+.meta-link-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(5px);
+  background-color: #333;
+  color: #fff;
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 0.75rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.meta-link-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 4px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+.meta-link-wrapper:hover .meta-link-tooltip {
   opacity: 1;
-  border-color: rgba(255, 255, 255, 0.8);
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 .case-study-hero .scroll-indicator {
