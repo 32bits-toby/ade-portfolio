@@ -3093,6 +3093,8 @@ body.home-page .bridge-section {
   display: flex;
   flex-direction: column;
   gap: 28px;
+  max-width: 60%;
+  margin: 0 auto;
 }
 
 .cs-section {
@@ -3281,6 +3283,10 @@ body.home-page .bridge-section {
   .cs-section {
     grid-template-columns: 1fr;
     gap: 6px 0;
+  }
+
+  .cs-body-inner {
+    max-width: 100%;
   }
 
   .cs-label {
