@@ -101,22 +101,14 @@ const initCaseStudyGallery = () => {
 };
 
 const getProjectGalleryImages = (project) => {
-  const defaults = ['/assets/design-1.svg', '/assets/design-2.svg', '/assets/design-3.svg', '/assets/design-4.svg'];
-  const fromProject = Array.isArray(project.images) && project.images.length > 0
-    ? project.images.filter(Boolean)
-    : [project.image].filter(Boolean);
-
-  const images = [...fromProject];
-
-  for (let i = 0; i < defaults.length && images.length < 4; i++) {
-    images.push(defaults[i]);
+  if (Array.isArray(project.images) && project.images.length > 0) {
+    return project.images.filter(Boolean);
   }
-
-  if (images.length === 0) {
-    return defaults;
+  // Fallback to single image if present and not a default SVG
+  if (project.image && !project.image.includes('/assets/design-')) {
+    return [project.image];
   }
-
-  return images.slice(0, 4);
+  return [];
 };
 
 if (root) {
@@ -171,6 +163,14 @@ if (root) {
                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                </a>
                <span class="meta-link-tooltip">GitHub</span>
+             </div>`
+          : '',
+        project.links.linkedin
+          ? `<div class="meta-link-wrapper">
+               <a href="${project.links.linkedin}" class="meta-link-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+               </a>
+               <span class="meta-link-tooltip">LinkedIn</span>
              </div>`
           : ''
       ].join('');
@@ -298,6 +298,7 @@ if (root) {
           </div>
         </header>
 
+        ${images.length > 0 ? `
         <section class="case-study-gallery-section container reveal-text in-view delay-1">
           <div class="case-study-gallery-viewport">
             <button class="case-study-gallery-btn case-study-gallery-btn-prev" data-gallery-prev aria-label="Previous slide">
@@ -320,6 +321,7 @@ if (root) {
           <p class="case-study-gallery-counter" data-gallery-counter></p>
           <div class="case-study-gallery-dots"></div>
         </section>
+        ` : ''}
 
         ${contentSectionHtml}
       `;

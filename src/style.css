@@ -1801,21 +1801,23 @@ body.home-page .bridge-section {
   }
 }
 
-/* Editorial Footer */
+/* Editorial Footer (Dark Minimalist) */
 .editorial-footer {
-  background-color: #ffffff;
-  color: #000000;
+  background-color: #0a0a0a;
+  color: #ffffff;
   padding: 6rem 0 4rem 0;
   margin-top: 0;
   position: relative;
   z-index: 10;
   width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  /* Subtle separation */
 }
 
 .footer-content {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   padding: 0 var(--spacing-md);
   max-width: var(--container-width);
   margin: 0 auto;
@@ -1830,8 +1832,7 @@ body.home-page .bridge-section {
   line-height: 0.8;
   letter-spacing: -0.04em;
   margin: 0;
-  transform: translateY(-0.1em);
-  color: #000000;
+  color: #ffffff;
 }
 
 /* Right: Columns */
@@ -1839,7 +1840,6 @@ body.home-page .bridge-section {
   display: flex;
   gap: clamp(3rem, 6vw, 8rem);
   text-align: left;
-  padding-top: 1rem;
 }
 
 .footer-col {
@@ -1857,10 +1857,13 @@ body.home-page .bridge-section {
 }
 
 .footer-title {
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 0.75rem;
   font-weight: 500;
-  color: #888;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666666;
+  /* Muted tech look */
   margin-bottom: 0.5rem;
 }
 
@@ -1872,17 +1875,20 @@ body.home-page .bridge-section {
 
 .footer-link {
   font-family: var(--font-sans);
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 400;
-  color: #000000 !important;
+  color: #bbbbbb;
+  /* Light grey instead of forced black */
   text-decoration: none;
-  transition: opacity 0.2s;
-  opacity: 1;
-  display: block;
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+  width: fit-content;
 }
 
 .footer-link:hover {
-  opacity: 0.6;
+  color: #8db83a;
+  /* Olive green accent */
+  transform: translateX(2px);
 }
 
 /* Scroll Top Button */
@@ -1890,24 +1896,31 @@ body.home-page .bridge-section {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #1a1a1a;
-  color: #fff;
-  border: none;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .scroll-top-btn svg {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
+  stroke: #ffffff;
+  transition: stroke 0.3s ease;
 }
 
 .scroll-top-btn:hover {
   transform: translateY(-4px);
-  background: #000;
+  border-color: #8db83a;
+  background: rgba(141, 184, 58, 0.05);
+}
+
+.scroll-top-btn:hover svg {
+  stroke: #8db83a;
 }
 
 /* Responsive Footer */
@@ -2424,6 +2437,19 @@ body.home-page .bridge-section {
   align-items: flex-end;
 }
 
+.skills-page .subpage-hero,
+.projects-page .subpage-hero {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 64px;
+  margin-bottom: 64px;
+}
+
+.contact-page .subpage-hero {
+  border-bottom: none;
+  padding-bottom: 64px;
+  margin-bottom: 64px;
+}
+
 .portfolio-page .subpage-nav {
   position: fixed;
   top: 0;
@@ -2454,9 +2480,11 @@ body.home-page .bridge-section {
   line-height: 1.65;
 }
 
-/* ──────── Projects Page (ProjectsPage.jsx) ──────── */
+/* ──────── Projects & Skills Pages Typography ──────── */
 
-.projects-page .section-label {
+.projects-page .section-label,
+.skills-page .section-label,
+.contact-page .section-label {
   font-family: 'DM Mono', var(--font-mono, monospace);
   font-size: 11px;
   letter-spacing: 0.15em;
@@ -2465,9 +2493,11 @@ body.home-page .bridge-section {
   font-weight: 400;
 }
 
-.projects-page .subpage-title {
+.projects-page .subpage-title,
+.skills-page .subpage-title,
+.contact-page .subpage-title {
   font-family: 'Syne', var(--font-sans);
-  font-size: clamp(42px, 7vw, 80px);
+  font-size: clamp(32px, 5.5vw, 60px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.95;
@@ -2475,8 +2505,20 @@ body.home-page .bridge-section {
   margin-bottom: 24px;
 }
 
-.projects-page .subpage-heading {
+.projects-page .subpage-heading,
+.skills-page .subpage-heading,
+.contact-page .subpage-heading {
   max-width: 1200px;
+}
+
+.projects-page .subpage-subtitle,
+.skills-page .subpage-subtitle,
+.contact-page .subpage-subtitle {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.7;
 }
 
 .projects-page .pp-card-title {
@@ -2785,120 +2827,280 @@ body.home-page .bridge-section {
   margin-top: 0.9rem;
 }
 
-/* Skills */
+/* Skills - Detailed Split Layout */
 .skills-section {
   padding-top: 0;
   padding-bottom: 10rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
 }
 
-.skill-group {
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 1.4rem;
-  background: rgba(255, 255, 255, 0.02);
+.skill-group-detailed {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 0 224px;
+  align-items: start;
+  padding: 48px 0;
+}
+
+.skill-group-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: sticky;
+  top: 100px;
+}
+
+.skill-group-id {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: #555;
+  letter-spacing: 0.1em;
 }
 
 .skill-group-title {
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-secondary);
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #e8e8e8;
+  margin: 0;
 }
 
-.skill-grid {
+.skill-group-desc {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: #888;
+  line-height: 1.65;
+  font-weight: 300;
+  margin: 0;
+}
+
+.skill-group-count {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: #8db83a;
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* Tool Grid */
+.tool-grid-detailed {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
 }
 
-.skill-tile {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 0.9rem 0.7rem;
+/* Tool Card Item */
+.tool-card-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  background: rgba(255, 255, 255, 0.03);
-  min-height: 110px;
+  gap: 14px;
+  padding: 28px 16px 24px;
+  background: #111111;
+  border: 1px solid #1e1e1e;
+  border-radius: 4px;
+  cursor: default;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.skill-tile img {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
+.tool-card-item:hover {
+  border-color: #2a2a2a;
+  background: #161616;
 }
 
-.skill-tile span {
-  font-size: 0.8rem;
-  color: #e1e1e1;
-  text-align: center;
+.tool-card-item:hover .tool-name-text {
+  color: #e8e8e8;
 }
 
-.skill-glyph {
-  width: 34px;
-  height: 34px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  display: inline-flex;
+.tool-icon-wrapper {
+  width: 40px;
+  height: 40px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.65rem !important;
-  letter-spacing: 0.04em;
+  flex-shrink: 0;
 }
 
-/* Contact */
+.tool-icon-wrapper img,
+.tool-icon-wrapper svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.tool-name-text {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 0.7rem;
+  color: #555;
+  letter-spacing: 0.04em;
+  text-align: center;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+
+/* Contact - Interactive Split Grid Layout */
 .contact-section {
   padding-top: 0;
   padding-bottom: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  gap: 16px;
 }
 
-.contact-tile {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 1.4rem;
+.contact-row-card {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  background: linear-gradient(165deg,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0.01) 100%);
+  gap: 20px;
+  padding: 28px 28px 24px;
+  background: #111111;
+  border: 1px solid #1e1e1e;
+  border-radius: 4px;
+  /* match the new tools aesthetic if necessary or keep boxy */
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  animation: fadeUp 0.4s ease both;
 }
 
-.contact-icon {
-  width: 62px;
-  height: 62px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  display: inline-flex;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover Interactions */
+.contact-row-card:hover {
+  border-color: #2a2a2a;
+  background: #131313;
+}
+
+.contact-row-card:hover .row-platform {
+  color: #c8f060;
+}
+
+.contact-row-card:hover .row-handle {
+  color: #e8e8e8;
+}
+
+.contact-row-card:hover .row-action {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.contact-row-card:hover .row-arrow {
+  transform: translateX(3px);
+}
+
+/* Internal Card Layout */
+.contact-row-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.row-id {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 10px;
+  color: #333333;
+  letter-spacing: 0.1em;
+}
+
+.row-arrow {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 14px;
+  color: #333333;
+  transition: transform 0.2s ease;
+}
+
+.contact-row-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 3px;
+  background: #161616;
+  border: 1px solid #1e1e1e;
+  display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.35rem;
+  color: #555555;
+  flex-shrink: 0;
+  transition: color 0.15s ease;
 }
 
-.contact-label {
+.contact-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.row-platform {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 10px;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
+  color: #555555;
+  transition: color 0.15s ease;
 }
 
-.contact-value {
-  font-size: 1rem;
-  line-height: 1.45;
-  color: #f4f4f4;
-  word-break: break-word;
+.row-handle {
+  font-family: 'Syne', var(--font-sans);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #aaaaaa;
+  transition: color 0.15s ease;
+  word-break: break-all;
+  /* safety wrap */
+}
+
+.row-action {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 11px;
+  color: #c8f060;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  margin-top: auto;
+}
+
+/* Availability Status Bar */
+.availability-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.avail-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c8f060;
+  box-shadow: 0 0 8px rgba(200, 240, 96, 0.5);
+  flex-shrink: 0;
+}
+
+.avail-text {
+  font-family: 'DM Mono', var(--font-mono, monospace);
+  font-size: 11px;
+  color: #555555;
+  letter-spacing: 0.06em;
 }
 
 /* Responsive for subpages */
@@ -2946,6 +3148,21 @@ body.home-page .bridge-section {
 
   .skills-section {
     padding-bottom: 6rem;
+  }
+
+  .skill-group-detailed {
+    grid-template-columns: 1fr;
+    gap: 32px 0;
+    padding: 32px 0;
+  }
+
+  .skill-group-meta {
+    position: relative;
+    top: 0;
+  }
+
+  .tool-grid-detailed {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .skill-grid {
@@ -3456,7 +3673,7 @@ body.home-page .bridge-section {
   }
 
   .case-study-title {
-    font-size: clamp(1.9rem, 10.2vw, 2.8rem);
+    font-size: clamp(1.6rem, 8vw, 2.2rem);
     max-width: 16ch;
     margin-bottom: 2.7rem;
   }
@@ -3532,6 +3749,7 @@ body.home-page .hero-rotator-text {
   font-size: 13px;
   letter-spacing: 0.05em;
   color: #888;
+  opacity: 0.6;
 }
 
 body.home-page .hero-rotator-icon {
@@ -3592,10 +3810,10 @@ body.home-page .gallery-see-all:hover {
 
 body.home-page .narrative-label {
   font-family: 'DM Mono', var(--font-mono, monospace);
-  font-size: 12px;
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: #8db83a;
+  letter-spacing: 0.12em;
+  color: #666;
 }
 
 body.home-page .semibold-narrative {

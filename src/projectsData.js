@@ -14,11 +14,15 @@ export const projects = [
     ],
     outcome: 'Revenue tells only part of the story — lost orders and fulfillment gaps quietly erode what strong sales have built.',
     links: {
-      dashboard: 'https://app.powerbi.com/',
-      github: 'https://github.com/Ade-Adeola',
-      medium: 'https://medium.com/@adeolaaderibigbe10'
+      dashboard: 'https://app.powerbi.com/view?r=eyJrIjoiZGIyM2M0ODYtZTQ3Ni00Y2QzLTg5NWMtMDIwNzVlN2RmMWU2IiwidCI6IjA3NTY1ZTVjLTU2ODEtNDk5OC1hN2RjLTU1OGZiM2U2OGU3NSJ9',
+      github: 'https://github.com/Ade-Adeola/PowerBi_Project_Submission',
+      linkedin: 'https://lnkd.in/eukwgRwX'
     },
-    image: '/assets/design-1.svg',
+    image: '/images/metro-bikes/MetroBikes 01.png',
+    images: [
+      '/images/metro-bikes/MetroBikes 01.png',
+      '/images/metro-bikes/MetroBikes 02.png'
+    ],
     caseStudy: {
       summary: 'This project is a multi-page interactive Power BI dashboard designed to analyze bike sales performance across revenue, orders, and contribution metrics. The goal was to uncover sales trends, identify revenue leakage, and understand how products, brands, stores, and time periods contribute to overall performance. The dashboard was built with a strong focus on usability, interactivity, and decision-making support.',
       what: [
@@ -58,10 +62,10 @@ export const projects = [
     ],
     outcome: 'Applying machine learning to domain-specific engineering problems requires understanding the workflow first — the model is only as good as the pipeline behind it.',
     links: {
-      dashboard: 'https://app.powerbi.com/',
-      github: 'https://github.com/Ade-Adeola'
+      linkedin: 'https://www.linkedin.com/posts/aderibigbe-adeola_machinelearning-datascience-petroleumengineering-activity-7314681819159814146-6LaZ?utm_source=share&utm_medium=member_desktop&rcm=ACoAADOFfMQBTxQZJTlPUmUtOmFAzu0pBMovHug'
     },
     image: '/assets/design-2.svg',
+    images: [],
     caseStudy: {
       summary: 'This project focuses on building and deploying an end-to-end machine learning solution to predict Rate of Penetration (ROP) in drilling operations. The objective was to apply data science techniques to a real petroleum engineering problem and deliver a practical, deployable prediction tool.',
       what: [
@@ -109,11 +113,20 @@ export const projects = [
     ],
     outcome: 'Revenue tells only half the story. What is wasted in operations can quietly erase the gains made by marketing and sales.',
     links: {
-      dashboard: 'https://app.powerbi.com/',
-      github: 'https://github.com/Ade-Adeola',
-      medium: 'https://medium.com/@adeolaaderibigbe10'
+      dashboard: 'https://app.powerbi.com/view?r=eyJrIjoiZjBjYjQxNmUtOWRjNy00ODkxLWFkYzEtMTI3NjY4Mzk4N2IyIiwidCI6IjA3NTY1ZTVjLTU2ODEtNDk5OC1hN2RjLTU1OGZiM2U2OGU3NSJ9',
+      github: 'https://github.com/Ade-Adeola/blinkit-powerbi-dashboard',
+      medium: 'https://medium.com/@adeolaaderibigbe10/blinkit-power-bi-dashboard-project-a-full-stack-business-intelligence-breakdown-74e623f56f0a',
+      linkedin: 'https://www.linkedin.com/posts/aderibigbe-adeola_powerbi-dataanalytics-dashboarddesign-activity-7329328701270016001-Ijto?utm_source=share&utm_medium=member_desktop&rcm=ACoAADOFfMQBTxQZJTlPUmUtOmFAzu0pBMovHug'
     },
-    image: '/assets/design-3.svg',
+    image: '/images/blinkit/Blinkit 06.png',
+    images: [
+      '/images/blinkit/Blinkit 01.png',
+      '/images/blinkit/Blinkit 02.png',
+      '/images/blinkit/Blinkit 03.png',
+      '/images/blinkit/Blinkit 04.png',
+      '/images/blinkit/Blinkit 05.png',
+      '/images/blinkit/Blinkit 06.png'
+    ],
     caseStudy: {
       summary: 'This project is a comprehensive business intelligence dashboard built using a Blinkit dataset to analyze sales, marketing performance, operations, inventory, and customer behavior. What began as a sales performance review evolved into a full operational deep dive, uncovering hidden inefficiencies behind strong revenue numbers. The dashboard was designed to help decision-makers quickly identify not just growth, but where value is silently being lost.',
       what: [
@@ -163,10 +176,16 @@ export const projects = [
     ],
     outcome: 'Accuracy in analytics begins with understanding the data — not rushing to conclusions.',
     links: {
-      dashboard: 'https://app.powerbi.com/',
-      github: 'https://github.com/Ade-Adeola'
+      dashboard: 'https://app.powerbi.com/view?r=eyJrIjoiZGEyYzdjODgtYmI5Yy00YjAxLWEyMDYtYTU2MGM0ZDViODIwIiwidCI6IjA3NTY1ZTVjLTU2ODEtNDk5OC1hN2RjLTU1OGZiM2U2OGU3NSJ9',
+      linkedin: 'https://www.linkedin.com/posts/aderibigbe-adeola_fp20-analytics-challenge-27-activity-7340188611947978752-bDLG?utm_source=share&utm_medium=member_desktop&rcm=ACoAADOFfMQBTxQZJTlPUmUtOmFAzu0pBMovHug'
     },
-    image: '/assets/design-4.svg',
+    image: '/images/banking-analysis/Banking Analysis 01.png',
+    images: [
+      '/images/banking-analysis/Banking Analysis 01.png',
+      '/images/banking-analysis/Banking Analysis 02.png',
+      '/images/banking-analysis/Banking Analysis 03.png',
+      '/images/banking-analysis/Banking Analysis 04.png'
+    ],
     caseStudy: {
       summary: 'This project was built as part of FP20 Analytics Challenge 27 and marks my first participation in the challenge. The goal was to analyze banking transactions across revenue, customer behavior, transaction patterns, and performance trends. What made this project stand out was a key analytical correction: realizing that not every transaction represents revenue. That single insight reshaped the entire analysis and led to a far more accurate financial story.',
       what: [
@@ -215,11 +234,20 @@ export const projects = [
     ],
     outcome: 'Injury prevention is a data problem — and data can save careers, costs, and seasons.',
     links: {
-      dashboard: 'https://app.powerbi.com/',
-      github: 'https://github.com/Ade-Adeola',
-      medium: 'https://medium.com/@adeolaaderibigbe10'
+      dashboard: 'https://app.powerbi.com/view?r=eyJrIjoiZDE1ZDI2MTItMTI4Ny00NzE5LTlkMzktMzQ2ZDY5ZjMzNDBiIiwidCI6IjA3NTY1ZTVjLTU2ODEtNDk5OC1hN2RjLTU1OGZiM2U2OGU3NSJ9',
+      github: 'https://github.com/Ade-Adeola/Sports-Injuries-Analysis-FP20-Challenge-29',
+      medium: 'https://medium.com/@adeolaaderibigbe10/what-15-000-sports-injuries-taught-me-about-patterns-recovery-and-prevention-f8044f162f98',
+      linkedin: 'https://www.linkedin.com/posts/aderibigbe-adeola_fp20analytics-fp20financial-builtwithzoomcharts-activity-7362031347420274689-ckED?utm_source=share&utm_medium=member_desktop&rcm=ACoAADOFfMQBTxQZJTlPUmUtOmFAzu0pBMovHug'
     },
-    image: '/assets/design-5.svg',
+    image: '/images/SIA/SIA 02.png',
+    images: [
+      '/images/SIA/SIA 01.png',
+      '/images/SIA/SIA 02.png',
+      '/images/SIA/SIA 03.png',
+      '/images/SIA/SIA 04.png',
+      '/images/SIA/SIA 05.png',
+      '/images/SIA/SIA 06.png'
+    ],
     caseStudy: {
       summary: 'This project was developed as part of FP20 Analytics Challenge 29, where I analyzed 15,000 recorded sports injury cases to uncover patterns in injury frequency, severity, recovery time, recurrence, and financial impact. Rather than stopping at descriptive statistics, the goal was to tell a prevention-focused story: identifying where injuries repeat, who is most at risk, and how data can guide safer training and recovery strategies.',
       what: [
@@ -270,10 +298,18 @@ export const projects = [
     ],
     outcome: 'People drive performance — and performance drives business results.',
     links: {
-      dashboard: 'https://app.powerbi.com/',
-      github: 'https://github.com/Ade-Adeola'
+      dashboard: 'https://app.powerbi.com/view?r=eyJrIjoiNWU5NGQwZjItOGRmOS00YjE3LTljMDMtNmU0YzFkNmMxMTc4IiwidCI6IjA3NTY1ZTVjLTU2ODEtNDk5OC1hN2RjLTU1OGZiM2U2OGU3NSJ9',
+      github: 'https://github.com/Ade-Adeola/Employee-Performance-Analysis-FP20-Analytics-Challenge-30.',
+      linkedin: 'https://www.linkedin.com/posts/aderibigbe-adeola_fp20analytics-fp20analyticschallenge30-powerbi-activity-7375114317035102208-0vJP?utm_source=share&utm_medium=member_desktop&rcm=ACoAADOFfMQBTxQZJTlPUmUtOmFAzu0pBMovHug'
     },
-    image: '/assets/design-1.svg',
+    image: '/images/EPA/EPA 01.png',
+    images: [
+      '/images/EPA/EPA 01.png',
+      '/images/EPA/EPA 02.png',
+      '/images/EPA/EPA 03.png',
+      '/images/EPA/EPA 04.png',
+      '/images/EPA/EPA 05.png'
+    ],
     caseStudy: {
       summary: 'This project was developed as part of FP20 Analytics Challenge 30, where I analyzed a comprehensive employee performance dataset covering workforce size, salaries, performance ratings, satisfaction, attrition, and business outcomes across multiple departments and store locations. The goal was to move beyond headcount reporting and uncover how people performance connects to business performance — identifying who drives results, where attrition risk exists, and how compensation, training, and satisfaction influence outcomes.',
       what: [
@@ -321,12 +357,11 @@ export const projects = [
     ],
     outcome: 'In fraud detection, it is better to flag a few legitimate transactions than to let real fraud slip through unnoticed.',
     links: {
-      dashboard: 'https://app.powerbi.com/',
-      github: 'https://github.com/Ade-Adeola',
-      medium: 'https://medium.com/@adeolaaderibigbe10'
+      github: 'https://github.com/Ade-Adeola/Fraud-Detection-ML',
+      linkedin: 'https://www.linkedin.com/posts/aderibigbe-adeola_datascience-machinelearning-frauddetection-activity-7367877458911571969-jpk8?utm_source=share&utm_medium=member_desktop&rcm=ACoAADOFfMQBTxQZJTlPUmUtOmFAzu0pBMovHug'
     },
     image: '/assets/design-2.svg',
-    images: ['/assets/design-2.svg', '/assets/design-3.svg', '/assets/design-4.svg'],
+    images: [],
     caseStudy: {
       summary: 'Detecting fraud in highly imbalanced financial transaction data — where 95% accuracy hides a dangerous flaw. This project became an exploration of why accuracy alone is misleading and how model evaluation must align with real business risk.',
       what: [
@@ -377,11 +412,15 @@ export const projects = [
     ],
     outcome: 'Animal shelter operations are deeply seasonal — data reveals exactly when, where, and how pressure builds.',
     links: {
-      dashboard: 'https://share.streamlit.io/',
-      github: 'https://github.com/Ade-Adeola',
-      medium: 'https://medium.com/@adeolaaderibigbe10'
+      dashboard: 'https://app.powerbi.com/view?r=eyJrIjoiMzc0M2NhMTctOTQ2Zi00ZDZiLTg2ODUtZTRhYjkwNTZlZWQyIiwidCI6IjA3NTY1ZTVjLTU2ODEtNDk5OC1hN2RjLTU1OGZiM2U2OGU3NSJ9',
+      github: 'https://github.com/Ade-Adeola/Onyx-Data-Challenge-Animal-Care-Analysis',
+      linkedin: 'https://www.linkedin.com/posts/aderibigbe-adeola_datafam-datadna-powerbi-activity-7406170395797835776-U_Px?utm_source=share&utm_medium=member_desktop&rcm=ACoAADOFfMQBTxQZJTlPUmUtOmFAzu0pBMovHug'
     },
-    image: '/assets/design-3.svg',
+    image: '/images/animal-care/Animal care 01.png',
+    images: [
+      '/images/animal-care/Animal care 01.png',
+      '/images/animal-care/Animal care 02.png'
+    ],
     caseStudy: {
       summary: 'This project was built for the dataDNA Challenge by Onyx Data, where I analyzed an animal shelter operations dataset to uncover patterns in animal intake, shelter outcomes, adoption performance, and live release rates. The objective was to move beyond surface-level counts and understand where pressure builds within the shelter system, how outcomes evolve over time, and what factors influence adoption and survival outcomes.',
       what: [
@@ -431,9 +470,15 @@ export const projects = [
     links: {
       dashboard: 'https://app.powerbi.com/view?r=eyJrIjoiNjBiNThkODAtZmNlNC00YjA2LTgzZDQtOWNjNThjNWJlZGU4IiwidCI6IjA3NTY1ZTVjLTU2ODEtNDk5OC1hN2RjLTU1OGZiM2U2OGU3NSJ9',
       github: 'https://github.com/Ade-Adeola/Pharmascope-Analytics',
-      medium: 'https://www.linkedin.com/posts/aderibigbe-adeola_datafam-datadna-activity-7430480653428858880-Qgip'
+      linkedin: 'https://www.linkedin.com/posts/aderibigbe-adeola_datafam-datadna-activity-7430480653428858880-Qgip?utm_source=share&utm_medium=member_desktop&rcm=ACoAADOFfMQBTxQZJTlPUmUtOmFAzu0pBMovHug'
     },
-    image: '/assets/design-1.svg',
+    image: '/images/pharmascope/PharmaScope 01.png',
+    images: [
+      '/images/pharmascope/PharmaScope 01.png',
+      '/images/pharmascope/PharmaScope 02.png',
+      '/images/pharmascope/PharmaScope 03.png',
+      '/images/pharmascope/PharmaScope 04.png'
+    ],
     caseStudy: {
       summary: 'Completed for the Onyx DataDNA Challenge — analyzing a multi-country pharmacy network to understand revenue growth, profitability, operational efficiency, and risk concentration. The real question: is this growth sustainable?',
       what: [
